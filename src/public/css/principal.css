@@ -1,0 +1,56 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 06/03/2016, 22:32:05
+    Author     : Antonio Ricardo Andrade Castelo Branco
+*/
+@CHARSET "UTF-8";
+.container { width: 100%; height: 8%; border: 1px solid black;
+    background: url("../img/extr.png") bottom left no-repeat, 
+        url(../img/pernambuco.png) bottom right 50px no-repeat; background-size: auto 100%;
+     text-align: center; color: blue; font: normal bold 80% Arial;
+}
+h1[id="titulo_cabecalho"]{position: relative; margin-top: 2px; text-align: center; font-size: 180%;}
+body{font-family:Calibri, Tahoma, Arial;}
+.cabecalho{width: 100%;}
+.menu{position: absolute;width: 12%;height: 60%;left: 10px; font-size: medium; margin-top: 1%;}
+iframe[name="principal"]{position: absolute;height: 75%; width:85%; margin: 1% 0 -50% 13%;}
+iframe[name="exibe"]{position:absolute;height: 70%; width: 90%;}
+h2{text-align: center;}
+.login{	text-align: center;background-color:white;margin: 10% 35% 0% 35%; border-style:solid; padding: 20px 3px 20px 3px; width: 30%;font:15px arial,serif;}
+.login h3{color: white;}
+.login #campo{	position: relative;width: 50%;margin: 3px 0 5px 30%;}
+.login label{width: 40px; position: absolute;}
+.navegador{text-align: center;background-color:white;margin: 10% 35% 0% 35%; padding: 20px 3px 20px 3px; width: 30%;font:15px arial,serif;}
+.navegador #img{width:33%; float: left;}
+.button{width: 80px; height: 40px; margin: 0px 2px 0px 2px; white-space: pre-wrap; background-color: darkblue;
+color: white; cursor: pointer; font: 12px arial, serif;}
+table {border: none; font-size: small;}
+table th {background-color: black; color: white;}
+th[id=titulo]{background-color:threedface;}
+table tr:nth-child(odd){background-color: rgb(173,216,230);}
+table tr:nth-child(even){background-color: rgb(220,220,220);}
+td[id="Aberto - Em Atraso"]{background-color:yellow;}
+td[id="Fechado - Em Atraso"]{background-color:red;}
+td[id="Aberto - No Prazo"]{background-color:greenyellow;}
+td[id="Fechado - No Prazo"]{}
+td[id=rodape]{background-color:teal; color:white;}
+.formulario{margin: 1% 15% 20px 15%; border-style: solid; padding: 10px 10px 10px 10px; }
+textArea{width: 100%;}
+input[type="text"]{text-transform: uppercase;}
+input[name="procedimento_local_fato"]{width: 50%;}
+input,label{margin-bottom: 2px;}
+.botao{text-transform: capitalize;}
+.maiusculo {text-transform: uppercase;}
+div[id=sub-form]{border: 2px solid; padding: 2px 0 5px 5px; margin: 15px 0 2px 0;}
+div[id=sub-form] label[name=sub-titulo]{position: absolute; margin: -15px 0 0 5px; background:white;}
+.mostrador{border: 2px solid; margin: 2px 2px 1px 2px; padding-left: 10px;}
+#sessao{position: absolute; margin-left: 50%;}
+#TabbedPanels1 .TabbedPanelsContentGroup .TabbedPanelsContent.TabbedPanelsContentVisible iframe {
+	width: 100%; height: 320px; overflow-y: scroll;
+}
+.aviso{width: 20%; text-align: center; margin: 2% 40% 0 40%;}
+.aviso p{text-align: justify;}
