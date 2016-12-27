@@ -17,7 +17,7 @@ class Creator {
      * 
      * @return retorna uma Classe
      */
-    public static function factoryMethod($namespace, array $data){
+    public static function factoryMethod($namespace, array $dados){
         /*
          * Condicional verifica se a classe existe, caso não levanta a exceção.
          */
