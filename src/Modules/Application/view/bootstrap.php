@@ -17,6 +17,8 @@ and open the template in the editor.
     </head>
     <body>
         <?php
+        ini_set("display_errors", 1);
+        error_reporting(E_ALL);
          include_once filter_input(INPUT_SERVER, "DOCUMENT_ROOT")."/cemet/vendor/autoload.php";
          include_once filter_input(INPUT_SERVER, "DOCUMENT_ROOT")."/cemet/src/Modules/". filter_input(INPUT_GET, "page");
         ?>
