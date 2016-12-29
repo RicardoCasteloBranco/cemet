@@ -26,6 +26,7 @@ class AulaTabela  implements ITabela{
     public static function findAll() {
         $tr = self::getInstancia();
         $table = $tr->getTable();
+        $table->setWhere(["iddisciplina" => IDDISCIPLINA]);
         $tr->setTable($table);
         return $tr->findAll();
     }

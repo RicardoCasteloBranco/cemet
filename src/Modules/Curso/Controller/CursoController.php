@@ -16,7 +16,7 @@ class CursoController implements IController{
                     factoryMethod(\CasteloBranco\Cemet\Modules\Curso\Model\Curso::class,
                             $dados);
             \CasteloBranco\Cemet\Modules\Curso\Model\CursoTabela::insert($classe);
-            header();
+            header("location:?module=Curso&page=index.php");
         }
         return array(
             "orgaos" => $orgaos
@@ -29,18 +29,19 @@ class CursoController implements IController{
 
     public function editAction() {
         $curso = \CasteloBranco\Cemet\Modules\Curso\Model\CursoTabela::
-                find(filter_input(INPUT_GET, "idcurso"));
-        
+                find(["idcurso" => filter_input(INPUT_GET, "idcurso")]);
+        $orgaos = \CasteloBranco\Cemet\Modules\Orgao\Model\OrgaoTabela::findAll();
         if(filter_input(INPUT_SERVER, "REQUEST_METHOD") == "POST"){
             $dados = filter_input_array(INPUT_POST);
             $classe = \CasteloBranco\Cemet\Factory\Creator::
                     factoryMethod(\CasteloBranco\Cemet\Modules\Curso\Model\Curso::class,
                             $dados);
             \CasteloBranco\Cemet\Modules\Curso\Model\CursoTabela::update($curso, $classe);
-            header();
+            header("location:?module=Curso&page=index.php");
         }
         return array(
             "curso" => $curso,
+            "orgaos" => $orgaos
         );
     }
 

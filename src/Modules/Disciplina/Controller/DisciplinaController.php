@@ -9,14 +9,14 @@ use CasteloBranco\Cemet\Interfaces\IController;
 class DisciplinaController implements IController{
     public function addAction() {
         $cursos = \CasteloBranco\Cemet\Modules\Curso\Model\CursoTabela::findAll();
-        if(filter_input(INPUT_POST, "REQUEST_METHOD") == "POST"){
+        if(filter_input(INPUT_SERVER, "REQUEST_METHOD") == "POST"){
             $dados = filter_input_array(INPUT_POST);
             $classe = \CasteloBranco\Cemet\Factory\Creator::
                     factoryMethod(\CasteloBranco\Cemet\Modules\Disciplina\Model\Disciplina::class,
                             $dados);
             \CasteloBranco\Cemet\Modules\Disciplina\Model\DisciplinaTabela::
                     insert($classe);
-                    header();
+            header("location:?module=Disciplina&page=show.php&idcurso=". filter_input(INPUT_POST, "idcurso"));
         }
         return array(
             "cursos" => $cursos
@@ -29,7 +29,7 @@ class DisciplinaController implements IController{
 
     public function editAction() {
         $disciplina = \CasteloBranco\Cemet\Modules\Disciplina\Model\DisciplinaTabela::
-                find(filter_input(INPUT_GET, "iddisciplina"));
+                find(["iddisciplina" => filter_input(INPUT_GET, "iddisciplina")]);
         if(filter_input(INPUT_SERVER, "REQUEST_METHOD") == "POST"){
             $dados = filter_input_array(INPUT_POST);
             $classe = \CasteloBranco\Cemet\Factory\Creator::
@@ -37,7 +37,7 @@ class DisciplinaController implements IController{
                             $dados);
             \CasteloBranco\Cemet\Modules\Disciplina\Model\DisciplinaTabela::
                     update($disciplina, $classe);
-            header();
+            header("location:?module=Disciplina&page=show.php&idcurso=". filter_input(INPUT_POST, "idcurso"));
         }
         return array(
             "disciplina" => $disciplina,
@@ -45,10 +45,14 @@ class DisciplinaController implements IController{
     }
 
     public function indexAction() {
+        $curso = \CasteloBranco\Cemet\Modules\Curso\Model\CursoTabela::
+                find(["idcurso" => filter_input(INPUT_GET, "idcurso")]);
+        define("IDCURSO", filter_input(INPUT_GET, "idcurso"));
         $disciplinas = \CasteloBranco\Cemet\Modules\Disciplina\Model\DisciplinaTabela::
                 findAll();
         return array(
-            "disciplinas" => $disciplinas
+            "disciplinas" => $disciplinas,
+            "curso" => $curso
         );
     }
 

@@ -104,11 +104,11 @@ class Aula extends Product{
             "idaula" => \PDO::PARAM_INT,
             "iddisciplina" => \PDO::PARAM_INT,
             "objetivo" => \PDO::PARAM_STR,
-            "qtd_aulas" => \PDO::PARA_INT,
-            "instrutor_secundario" => \PDO::PARAM_BOOL,
+            "qtd_aulas" => \PDO::PARAM_INT,
+            "instrutor_secundario" => \PDO::PARAM_INT,
             "conteudo" => \PDO::PARAM_STR,
             "eixo" => \PDO::PARAM_STR,
-            "relacao" => \PDO::PARAM_SR,
+            "relacao" => \PDO::PARAM_STR,
         );
     }
 

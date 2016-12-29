@@ -26,6 +26,7 @@ class CargoTabela implements ITabela{
     public static function findAll() {
         $tr = self::getInstancia();
         $table = $tr->getTable();
+        $table->setJoin("INNER","orgao","cargo","idorgao","idorgao");
         $tr->setTable($table);
         return $tr->findAll();
     }

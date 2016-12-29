@@ -9,7 +9,7 @@ use CasteloBranco\Cemet\Factory\Product;
  */
 class Turma extends Product{
     private $idTurma;
-    private $idCurso;
+    private $companhia;
     private $turma;
     private $dataInicio;
     private $dataFim;
@@ -18,7 +18,7 @@ class Turma extends Product{
         $this->setIdTurma(isset($dados["idturma"])?$dados["idturma"]:0)
              ->setDataFim($dados["datafim"])
              ->setDataInicio($dados["datainicio"])
-             ->setIdCurso($dados["idcurso"])
+             ->setCompanhia($dados["companhia"])
              ->setTurma($dados["turma"]);
     }
     
@@ -26,8 +26,8 @@ class Turma extends Product{
         return $this->idTurma;
     }
 
-    public function getIdCurso() {
-        return $this->idCurso;
+    public function getCompanhia() {
+        return $this->companhia;
     }
 
     public function getTurma() {
@@ -46,9 +46,9 @@ class Turma extends Product{
         $this->idTurma = $idTurma;
         return $this;
     }
-
-    public function setIdCurso($idCurso) {
-        $this->idCurso = $idCurso;
+    
+    public function setCompanhia($companhia) {
+        $this->companhia = $companhia;
         return $this;
     }
 
@@ -70,7 +70,7 @@ class Turma extends Product{
     public function getParams() {
         return array(
             "idturma" => \PDO::PARAM_INT,
-            "idcurso" => \PDO::PARAM_INT,
+            "companhia" => \PDO::PARAM_INT,
             "turma" => \PDO::PARAM_STR,
             "datainicio" => \PDO::PARAM_STR,
             "datafim" => \PDO::PARAM_STR
@@ -80,7 +80,7 @@ class Turma extends Product{
     public function getValues() {
         return array(
             "idturma" => $this->getIdTurma(),
-            "idcurso" => $this->getIdCurso(),
+            "companhia" => $this->getCompanhia(),
             "turma" => $this->getTurma(),
             "datainicio" => $this->getDataInicio(),
             "datafim" => $this->getDataFim()

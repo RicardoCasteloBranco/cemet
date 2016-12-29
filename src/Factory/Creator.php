@@ -22,7 +22,7 @@ class Creator {
          * Condicional verifica se a classe existe, caso não levanta a exceção.
          */
         if(class_exists($namespace)){
-            $classe = new $namespace($data);
+            $classe = new $namespace($dados);
             return $classe;
         }else{
             throw new \Exception("Não existe classe com o namespace");

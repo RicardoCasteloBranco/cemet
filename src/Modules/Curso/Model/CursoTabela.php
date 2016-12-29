@@ -27,6 +27,7 @@ class CursoTabela implements ITabela{
         $tr = self::getInstancia();
         $table = $tr->getTable();
         $table->setJoin("INNER","orgao","curso","idorgao","idorgao");
+        $table->setOrder("curso.idorgao");
         $tr->setTable($table);
         return $tr->findAll();
     }

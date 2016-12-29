@@ -27,6 +27,7 @@ class DisciplinaTabela implements ITabela{
     public static function findAll() {
         $tr = self::getInstancia();
         $table = $tr->getTable();
+        $table->setWhere(["idcurso" => constant("IDCURSO")]);
         $tr->setTable($table);
         return $tr->findAll();
     }
@@ -37,7 +38,8 @@ class DisciplinaTabela implements ITabela{
     }
 
     public static function update($classeAnt, $classePos) {
-        
+        $tr = self::getInstancia();
+        $tr->update($classeAnt, $classePos);
     }
 
 }
