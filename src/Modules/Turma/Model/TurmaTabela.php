@@ -19,12 +19,24 @@ class TurmaTabela implements ITabela{
 
     public static function find($id) {
         $tr = self::getInstancia();
-        return $tr->find($id);
+        return \CasteloBranco\Cemet\Factory\Creator::
+                factoryMethod(Turma::class, $tr->find($id));
     }
 
     public static function findAll() {
+        $cols = ["idturma","turma","companhia","sala",
+            "(SELECT COUNT(idpessoa) FROM aluno WHERE aluno.idturma = turma.idturma) "
+            . "AS qtd_alunos ",
+            "(SELECT CONCAT_WS(' ', cargo.abreviatura, orgao.sigla,pessoa.nome) "
+            . "FROM coordenador INNER JOIN pessoa ON (coordenador.idpessoa = pessoa.idpessoa) "
+            . "INNER JOIN cargo ON (pessoa.idcargo = cargo.idcargo) INNER JOIN orgao ON "
+            . "(cargo.idorgao=orgao.idorgao) WHERE coordenador.idturma = turma.idturma)"
+            . " as coordenador"];
+        
         $tr = self::getInstancia();
         $table = $tr->getTable();
+        $table->setCols($cols);
+        $table->setWhere(["companhia" => COMPANHIA]);
         $tr->setTable($table);
         return $tr->findAll();
     }

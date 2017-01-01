@@ -30,7 +30,10 @@ class AulaController implements IController{
 
     public function editAction() {
         $aula = \CasteloBranco\Cemet\Modules\Aula\Model\AulaTabela::
-                find(filter_input(INPUT_GET, "idaula"));
+                find(["idaula" => filter_input(INPUT_GET, "idaula")]);
+        $disciplina = \CasteloBranco\Cemet\Modules\Disciplina\Model\DisciplinaTabela::
+        find(["iddisciplina" => $aula->getIdDisciplina()]);
+        
         if(filter_input(INPUT_SERVER, "REQUEST_METHOD") == "POST"){
             $dados = filter_input_array(INPUT_POST);
             $classe = \CasteloBranco\Cemet\Factory\Creator::
@@ -40,7 +43,8 @@ class AulaController implements IController{
             header("location:?module=Aula&page=index.php&iddisciplina=".$classe->getIdDisciplina());
         }
         return array(
-            "aula" => $aula
+            "aula" => $aula,
+            "disciplina" => $disciplina
         );
     }
 

@@ -11,15 +11,14 @@ class Turma extends Product{
     private $idTurma;
     private $companhia;
     private $turma;
-    private $dataInicio;
-    private $dataFim;
+    private $sala;
+    
     
     public function __construct(array $dados) {
         $this->setIdTurma(isset($dados["idturma"])?$dados["idturma"]:0)
-             ->setDataFim($dados["datafim"])
-             ->setDataInicio($dados["datainicio"])
              ->setCompanhia($dados["companhia"])
-             ->setTurma($dados["turma"]);
+             ->setTurma($dados["turma"])
+             ->setSala($dados["sala"]);
     }
     
     public function getIdTurma() {
@@ -33,15 +32,12 @@ class Turma extends Product{
     public function getTurma() {
         return $this->turma;
     }
-
-    public function getDataInicio() {
-        return $this->dataInicio;
+    
+    public function getSala() {
+        return $this->sala;
     }
 
-    public function getDataFim() {
-        return $this->dataFim;
-    }
-
+    
     public function setIdTurma($idTurma) {
         $this->idTurma = $idTurma;
         return $this;
@@ -56,24 +52,19 @@ class Turma extends Product{
         $this->turma = $turma;
         return $this;
     }
-
-    public function setDataInicio($dataInicio) {
-        $this->dataInicio = $dataInicio;
-        return $this;
-    }
-
-    public function setDataFim($dataFim) {
-        $this->dataFim = $dataFim;
-        return $this;
-    }
     
+    public function setSala($sala) {
+        $this->sala = $sala;
+        return $this;
+    }
+
+     
     public function getParams() {
         return array(
             "idturma" => \PDO::PARAM_INT,
             "companhia" => \PDO::PARAM_INT,
             "turma" => \PDO::PARAM_STR,
-            "datainicio" => \PDO::PARAM_STR,
-            "datafim" => \PDO::PARAM_STR
+            "sala" => \PDO::PARAM_STR
         );
     }
 
@@ -82,8 +73,7 @@ class Turma extends Product{
             "idturma" => $this->getIdTurma(),
             "companhia" => $this->getCompanhia(),
             "turma" => $this->getTurma(),
-            "datainicio" => $this->getDataInicio(),
-            "datafim" => $this->getDataFim()
+            "sala" => $this->getSala()
         );
     }
 }

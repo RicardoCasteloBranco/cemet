@@ -23,4 +23,34 @@ class ApplicationController {
         }
         return $verificador;
     }
+    
+    public function indexAction(){
+        $pessoa = \CasteloBranco\Cemet\Modules\Pessoa\Model\PessoaTabela::
+                find(["idpessoa" => filter_input(INPUT_GET,"user")]);
+        $menu = ApplicationTabela::montaMenu($pessoa);
+        return array(
+            "pessoa" => $pessoa,
+            "menu" => $menu
+        );
+    }
+    
+    public function loginAction(){
+        if(filter_input(INPUT_SERVER, "REQUEST_METHOD") == "POST"){
+            $cpf = str_replace([".","-"],"",filter_input(INPUT_POST, "cpf"));
+            $pessoa = ApplicationTabela::getUsuario($cpf);
+            if($pessoa->getSenha() == md5(filter_input(INPUT_POST, "senha"))){
+                header("location:../Modules/Application/view/index.php?module=Application"
+                        . "&page=mensagem.php&user=".$pessoa->getIdPessoa());
+            }else{
+                echo "<script type='text/javascript'>alert('Senha não confere')</script>";
+            }
+        }
+    }
+    
+    public function exitAction(){
+        if(filter_input(INPUT_SERVER, "REQUEST_METHOD") == "POST"){
+            header("location:../../../public/index.php");
+        }
+        
+    }
 }

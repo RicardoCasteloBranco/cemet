@@ -7,15 +7,15 @@ Exit to Application
         <meta charset="UTF-8">
         <title></title>
         <?php
-            use Corregedoria\Modules\Application\Controller\ApplicationController;
-            include_once '../../modules_autoload.php';
+            use CasteloBranco\Cemet\Modules\Application\Controller\ApplicationController;
+            include filter_input(INPUT_SERVER, "DOCUMENT_ROOT")."/cemet/vendor/autoload.php";
             $cont = new ApplicationController();
             $dados = $cont->exitAction();
         ?>
-        <link href="../../../css/principal.css" rel="StyleSheet" type="text/css">
+        <link href="../../../public/css/principal.css" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <form name="exit" method="post" action="" class="login">
+        <form name="exit" method="post" action="">
             <h2>Você deseja realmente sair do Sistema?</h2><br>
             <input type="submit" value="Sim">
             <input type="button" value="Não" onclick="history.go(-1)">

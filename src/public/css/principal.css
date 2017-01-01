@@ -13,8 +13,8 @@ html{font:Sans-Serif;}
 /*
 *Cabeçalho
 */
-.container { width: 100%; height: 8%; border: 1px solid black;
-    background: url("../img/extr.png") bottom left no-repeat, 
+.container { width: 100%; height: 10%; border: 1px solid black;
+    background: url("../img/cemet.png") bottom left 50px no-repeat, url("../img/extr.png") bottom left no-repeat, 
         url(../img/pernambuco.png) bottom right 50px no-repeat; background-size: auto 100%;
      text-align: center; color: blue; font: normal bold 80% Arial;
 }
@@ -30,9 +30,9 @@ iframe[name="exibe"]{position:absolute;height: 70%; width: 90%;}
 *Configuração da página
 */
 h1, h2, h3{font-family:Arial; color:maroon; text-align: center;}
-#bem_vindo{font-style: italic; margin-left: 10px;}
+#bem_vindo{font-style: italic; padding-top: 10px; text-align: right;}
 #pagina_principal{background-color: slategray;}
-blockquote{text-align: center;}
+#local{width: 100%; text-align: center;}
 /*
 *Estilo para tabela
 */
@@ -59,8 +59,8 @@ tbody th a {color:#333;}
 tbody tr:hover {background:#fafafa}
 /* formulário
 ------- */
-form{margin:0 30% 0 30%; width: 40%;background-color:slategray; padding:10px 10px 10px 10px; }
-form div{border:solid black 1px; background-color:silver;margin-bottom: 2px;padding:0 2px 5px 2px;}
+form{margin:0 30% 0 30%; width: 40%;background-color:slategray; padding:10px 10px 10px 10px; border-radius: 5px;}
+form div{border:solid black 1px; background-color: lightgrey;margin-bottom: 2px;padding:0 2px 5px 2px;}
 form label{position: relative; font-size: small; margin-right: 100%;}
 form input[type=text],select, input[type=date], input[type=time],
 input[type=password],input[type=email]{width: 100%; border-radius: 20px;}
@@ -107,3 +107,7 @@ Página Inicial
 Créditos finais
 */
 footer{margin-top: 42%; font-size: smaller;}
+/*
+*Login
+*/
+#login{margin-top: 10%;}

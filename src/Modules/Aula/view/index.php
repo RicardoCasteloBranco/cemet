@@ -18,7 +18,7 @@ $disciplina = $dados["disciplina"];
         <tr>
             <td><?php echo $row->objetivo; ?></td>
             <td><?php echo $row->qtd_aulas; ?></td>
-            <td><?php echo $row->instrutor_secundario; ?></td>
+            <td><?php ($row->instrutor_secundario == 1)?print_r("Sim"):print_r("Não"); ?></td>
             <td><?php echo $row->conteudo; ?></td>
             <td><?php echo $row->eixo; ?></td>
             <td><?php echo $row->relacao; ?></td>

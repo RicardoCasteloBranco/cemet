@@ -27,6 +27,7 @@ class CompanhiaTabela implements ITabela{
     public static function findAll() {
         $tr = self::getInstancia();
         $table = $tr->getTable();
+        $table->setWhere(["idcurso" => IDCURSO]);
         $tr->setTable($table);
         return $tr->findAll();
     }

@@ -12,6 +12,7 @@ and open the template in the editor.
         <link href="../../../public/css/paging.css" rel="stylesheet" type="text/css">
         <script src="../../../public/jscript/sorttable.js" type="text/javascript"></script>
         <script src="../../../public/jscript/paging.js" type="text/javascript"></script>
+        <script src="../../../public/jscript/mascara.js" type="text/javascript"></script>
     </head>
     <body>
         <?php

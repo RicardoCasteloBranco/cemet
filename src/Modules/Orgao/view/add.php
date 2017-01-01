@@ -2,8 +2,8 @@
 $ger = new \CasteloBranco\Cemet\Modules\Orgao\Controller\OrgaoController();
 $dados = $ger->addAction();
 ?>
+<h2>Orgão</h2>
 <form method="post" action="">
-    <h2>Orgão</h2>
     <div>
         <label for="orgao">Orgão</label>
         <input type="text" name="orgao">

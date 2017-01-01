@@ -10,13 +10,17 @@ class Companhia extends Product{
     private $idCompanhia;
     private $local;
     private $companhia;
-    private $curso;
+    private $idcurso;
+    private $dataInicio;
+    private $dataTermino;
     
     public function __construct(array $dados) {
         $this->setIdCompanhia(isset($dados["idcompanhia"])?$dados["idcompanhia"]:0)
              ->setCompanhia($dados["companhia"])
-             ->setCurso($dados["curso"])
-             ->setLocal($dados["local"]);
+             ->setIdCurso($dados["idcurso"])
+             ->setLocal($dados["local"])
+             ->setDataInicio($dados["data_inicio"])
+             ->setDataTermino($dados["data_termino"]);
     }
     
     public function getIdCompanhia() {
@@ -31,10 +35,19 @@ class Companhia extends Product{
         return $this->companhia;
     }
 
-    public function getCurso() {
-        return $this->curso;
+    public function getIdcurso() {
+        return $this->idcurso;
+    }
+    
+    public function getDataInicio() {
+        return $this->dataInicio;
     }
 
+    public function getDataTermino() {
+        return $this->dataTermino;
+    }
+
+    
     public function setIdCompanhia($idCompanhia) {
         $this->idCompanhia = $idCompanhia;
         return $this;
@@ -50,17 +63,30 @@ class Companhia extends Product{
         return $this;
     }
 
-    public function setCurso($curso) {
-        $this->curso = $curso;
+    public function setIdcurso($idcurso) {
+        $this->idcurso = $idcurso;
         return $this;
     }
-    
+
+    public function setDataInicio($dataInicio) {
+        $this->dataInicio = $dataInicio;
+        return $this;
+    }
+
+    public function setDataTermino($dataTermino) {
+        $this->dataTermino = $dataTermino;
+        return $this;
+    }
+
+            
     public function getParams() {
         return array(
             "idcompanhia" => \PDO::PARAM_INT,
             "companhia" => \PDO::PARAM_STR,
             "local" => \PDO::PARAM_STR,
-            "curso" => \PDO::PARAM_INT
+            "idcurso" => \PDO::PARAM_INT,
+            "data_inicio" => \PDO::PARAM_STR,
+            "data_termino" => \PDO::PARAM_STR
         );
     }
 
@@ -69,7 +95,9 @@ class Companhia extends Product{
             "idcompanhia" => $this->getIdCompanhia(),
             "companhia" => $this->getCompanhia(),
             "local" => $this->getLocal(),
-            "curso" => $this->getCurso()
+            "idcurso" => $this->getIdCurso(),
+            "data_inicio" => $this->getDataInicio(),
+            "data_termino" => $this->getDataTermino()
         );
     }
 }
