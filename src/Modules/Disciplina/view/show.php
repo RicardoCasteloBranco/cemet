@@ -4,6 +4,7 @@ $dados = $ger->indexAction();
 $curso = $dados["curso"];
 ?>
 <h2>Disciplinas - <?php echo $curso->getNomeCurso();?></h2>
+<button onclick="location.href='?module=Disciplina&page=index.php'" name="btn_volta">Voltar</button>
 <table class="sortable">
     <thead>
         <tr>

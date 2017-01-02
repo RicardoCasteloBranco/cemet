@@ -110,8 +110,9 @@ class SelectData extends DataSet{
         $termos = NULL;
         if(count($this->having)>0){
             $having .= "HAVING ";
-            foreach ($this->having as $str){
-                $termos .= "$str AND";
+            foreach ($this->having as $str => $v){
+                $termos .= "$str LIKE :$str AND";
+                $this->values = array_merge($this->values,[$str => $v]);
             }
             $having .= substr($termos,0,-4);
         }

@@ -1,6 +1,4 @@
 <?php
-ini_set("display_errors", 1);
-error_reporting(E_ALL);
 $ger = new CasteloBranco\Cemet\Modules\Coordenador\Controller\CoordenadorController();
 $dados = $ger->editAction();
 $coordenador = $dados["coordenador"];

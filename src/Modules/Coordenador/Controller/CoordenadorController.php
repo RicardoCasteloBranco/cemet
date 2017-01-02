@@ -44,8 +44,8 @@ class CoordenadorController implements IController{
             if(filter_input(INPUT_POST, "btn_action") == "Busca"){
                 $pessoa = $this->buscaCoordenador(filter_input(INPUT_POST, "cpf"));
             }
-            if(filter_input(INPUT_POST, "btn_action") == "Atualiza"){
-                $classe = \CasteloBranco\Cemet\Factory\Creator::factoryMethod(\CasteloBranco\Cemet\Modules\Coordenador\Model\Coordenador::class,fiter_input_array(INPUT_POST));
+            if(filter_input(INPUT_POST, "btn_action") == "Altera"){
+                $classe = \CasteloBranco\Cemet\Factory\Creator::factoryMethod(\CasteloBranco\Cemet\Modules\Coordenador\Model\Coordenador::class,filter_input_array(INPUT_POST));
                 $this->atualizaCoordenador($coordenador, $classe);
             }
         }
@@ -81,7 +81,9 @@ class CoordenadorController implements IController{
     private function atualizaCoordenador($coordenador, $coordenadorAtualizado){
         \CasteloBranco\Cemet\Modules\Coordenador\Model\CoordenadorTabela::
                 update($coordenador, $coordenadorAtualizado);
-        header();
+        $turma = \CasteloBranco\Cemet\Modules\Turma\Model\TurmaTabela::
+                find(["idturma" => $coordenador->getIdTurma()]);
+        header("location:?module=Turma&page=index.php&idcompanhia=".$turma->getCompanhia());
     }
 
 }
