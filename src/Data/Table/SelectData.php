@@ -111,7 +111,7 @@ class SelectData extends DataSet{
         if(count($this->having)>0){
             $having .= "HAVING ";
             foreach ($this->having as $str => $v){
-                $termos .= "$str LIKE :$str AND";
+                $termos .= "$str LIKE :$str AND ";
                 $this->values = array_merge($this->values,[$str => $v]);
             }
             $having .= substr($termos,0,-4);
@@ -125,8 +125,13 @@ class SelectData extends DataSet{
         if(count($this->where)>0){
             $where .= "WHERE ";
             foreach ($this->where as $str => $value){
-                $termos .= "$str LIKE :$str AND";
-                $this->values = array_merge($this->values,[$str => $value]);
+                if(is_null($value)){
+                    $termos .= "$str IS NULL AND ";
+                }else{
+                    $termos .= "$str LIKE :$str AND ";
+                    $this->values = array_merge($this->values,[$str => $value]);
+                }
+                
             }
             $where .= substr($termos,0,-4);
         }

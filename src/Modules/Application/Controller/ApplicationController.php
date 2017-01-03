@@ -24,9 +24,8 @@ class ApplicationController {
         return $verificador;
     }
     
-    public function indexAction(){
-        $pessoa = \CasteloBranco\Cemet\Modules\Pessoa\Model\PessoaTabela::
-                find(["idpessoa" => filter_input(INPUT_GET,"user")]);
+    public function indexAction(){        
+        $pessoa = unserialize($_SESSION["pessoa"]);
         $menu = ApplicationTabela::montaMenu($pessoa);
         return array(
             "pessoa" => $pessoa,
@@ -39,8 +38,9 @@ class ApplicationController {
             $cpf = str_replace([".","-"],"",filter_input(INPUT_POST, "cpf"));
             $pessoa = ApplicationTabela::getUsuario($cpf);
             if($pessoa->getSenha() == md5(filter_input(INPUT_POST, "senha"))){
+                $_SESSION["pessoa"] = serialize($pessoa);
                 header("location:../Modules/Application/view/index.php?module=Application"
-                        . "&page=mensagem.php&user=".$pessoa->getIdPessoa());
+                        . "&page=mensagem.php");
             }else{
                 echo "<script type='text/javascript'>alert('Senha não confere')</script>";
             }

@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.15, for Win32 (AMD64)
+-- MySQL dump 10.13  Distrib 5.7.16, for Linux (x86_64)
 --
 -- Host: localhost    Database: cemet
 -- ------------------------------------------------------
--- Server version	5.7.15-log
+-- Server version	5.7.16-0ubuntu0.16.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -132,7 +132,7 @@ CREATE TABLE `cargo` (
   PRIMARY KEY (`idcargo`),
   KEY `fk_cargo_orgao` (`idorgao`),
   CONSTRAINT `fk_cargo_orgao` FOREIGN KEY (`idorgao`) REFERENCES `orgao` (`idorgao`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -141,6 +141,7 @@ CREATE TABLE `cargo` (
 
 LOCK TABLES `cargo` WRITE;
 /*!40000 ALTER TABLE `cargo` DISABLE KEYS */;
+INSERT INTO `cargo` VALUES (1,'Capitão','Cap',1);
 /*!40000 ALTER TABLE `cargo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -155,11 +156,13 @@ CREATE TABLE `companhia` (
   `idcompanhia` int(11) NOT NULL AUTO_INCREMENT,
   `companhia` varchar(50) COLLATE utf8_bin DEFAULT NULL,
   `local` varchar(50) COLLATE utf8_bin DEFAULT NULL,
-  `curso` int(11) DEFAULT NULL,
+  `idcurso` int(11) DEFAULT NULL,
+  `data_inicio` date DEFAULT NULL,
+  `data_termino` date DEFAULT NULL,
   PRIMARY KEY (`idcompanhia`),
-  KEY `fk_companhia_curso` (`curso`),
-  CONSTRAINT `fk_companhia_curso` FOREIGN KEY (`curso`) REFERENCES `curso` (`idcurso`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  KEY `fk_companhia_curso` (`idcurso`),
+  CONSTRAINT `fk_companhia_curso` FOREIGN KEY (`idcurso`) REFERENCES `curso` (`idcurso`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -168,6 +171,7 @@ CREATE TABLE `companhia` (
 
 LOCK TABLES `companhia` WRITE;
 /*!40000 ALTER TABLE `companhia` DISABLE KEYS */;
+INSERT INTO `companhia` VALUES (1,'1ª Companhia','CEMET-I/Curado',1,'2016-12-31','2017-02-28'),(2,'2ª Companhia','FG/Piedade',1,'2016-12-31',NULL),(3,'1ª Companhia','CEMATA/Paudalho',4,'2016-12-31',NULL);
 /*!40000 ALTER TABLE `companhia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -197,6 +201,35 @@ LOCK TABLES `controle_disciplinar` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `coordenador`
+--
+
+DROP TABLE IF EXISTS `coordenador`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `coordenador` (
+  `idpessoa` int(11) NOT NULL,
+  `idturma` int(11) NOT NULL,
+  `idcoordenador` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`idcoordenador`),
+  KEY `fk_coordenador_pessoa` (`idpessoa`),
+  KEY `fk_coordenador_turma` (`idturma`),
+  CONSTRAINT `fk_coordenador_pessoa` FOREIGN KEY (`idpessoa`) REFERENCES `pessoa` (`idpessoa`),
+  CONSTRAINT `fk_coordenador_turma` FOREIGN KEY (`idturma`) REFERENCES `turma` (`idturma`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `coordenador`
+--
+
+LOCK TABLES `coordenador` WRITE;
+/*!40000 ALTER TABLE `coordenador` DISABLE KEYS */;
+INSERT INTO `coordenador` VALUES (1,3,1);
+/*!40000 ALTER TABLE `coordenador` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `curso`
 --
 
@@ -211,7 +244,7 @@ CREATE TABLE `curso` (
   PRIMARY KEY (`idcurso`),
   KEY `fk_curso_orgao` (`idorgao`),
   CONSTRAINT `fk_curso_orgao` FOREIGN KEY (`idorgao`) REFERENCES `orgao` (`idorgao`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -220,7 +253,7 @@ CREATE TABLE `curso` (
 
 LOCK TABLES `curso` WRITE;
 /*!40000 ALTER TABLE `curso` DISABLE KEYS */;
-INSERT INTO `curso` VALUES (1,1,'CFHP','Curso de Formação e Habilitação de Praças');
+INSERT INTO `curso` VALUES (1,1,'CFHP','Curso de Formação e Habilitação de Praças'),(2,2,'CFS','Curso de Formação de Sargentos'),(3,3,'CFA','Curso de Formação de Agentes'),(4,1,'CFO','Curso de Formação de Oficiais'),(5,2,'CAS','Curso de Aperfeiçoamento de Sargentos');
 /*!40000 ALTER TABLE `curso` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -245,7 +278,7 @@ CREATE TABLE `disciplina` (
   PRIMARY KEY (`iddisciplina`),
   KEY `fk_disciplina_curso` (`idcurso`),
   CONSTRAINT `fk_disciplina_curso` FOREIGN KEY (`idcurso`) REFERENCES `curso` (`idcurso`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -254,7 +287,7 @@ CREATE TABLE `disciplina` (
 
 LOCK TABLES `disciplina` WRITE;
 /*!40000 ALTER TABLE `disciplina` DISABLE KEYS */;
-INSERT INTO `disciplina` VALUES (1,1,'Abordagem a Pessoas','ABP',30,'Abordar Pessoas','Saber','Fazer','Sentir','Apostila'),(2,1,'Abordagem a Veículos','ABV',30,'Ementa','conhecimento','Habilidade','Atitude','Bibliografia');
+INSERT INTO `disciplina` VALUES (1,1,'Abordagem a Pessoas','ABP',30,'Abordar Pessoas','Saber','Fazer','Sentir','Apostila'),(2,1,'Abordagem a Veículos','ABV',30,'Ementa','conhecimento','Habilidade','Atitude','Bibliografia'),(3,4,'Direito Penal I','DP-1',30,'Estudo Básico do Direito Penal Brasileiro','Conhecer os princípios do Direito Penal','Manusear o código penal','Julgar as ocorrências','Código Penal Brasileiro');
 /*!40000 ALTER TABLE `disciplina` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -313,28 +346,6 @@ LOCK TABLES `falta` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `formacao`
---
-
-DROP TABLE IF EXISTS `formacao`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `formacao` (
-  `ID` int(11) DEFAULT NULL,
-  `DESCR` varchar(100) COLLATE utf8_bin DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `formacao`
---
-
-LOCK TABLES `formacao` WRITE;
-/*!40000 ALTER TABLE `formacao` DISABLE KEYS */;
-/*!40000 ALTER TABLE `formacao` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `fotografia`
 --
 
@@ -358,56 +369,6 @@ LOCK TABLES `fotografia` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `funcionalidade`
---
-
-DROP TABLE IF EXISTS `funcionalidade`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `funcionalidade` (
-  `func_id` int(11) NOT NULL AUTO_INCREMENT,
-  `func_descricao` varchar(50) COLLATE utf8_bin DEFAULT NULL,
-  `func_caminho` varchar(50) COLLATE utf8_bin DEFAULT NULL,
-  `menu_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`func_id`),
-  KEY `fk_funcionalidade_menu` (`menu_id`),
-  CONSTRAINT `fk_funcionalidade_menu` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`menu_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `funcionalidade`
---
-
-LOCK TABLES `funcionalidade` WRITE;
-/*!40000 ALTER TABLE `funcionalidade` DISABLE KEYS */;
-/*!40000 ALTER TABLE `funcionalidade` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `grupo`
---
-
-DROP TABLE IF EXISTS `grupo`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `grupo` (
-  `grupo_id` int(11) NOT NULL AUTO_INCREMENT,
-  `grupo_descricao` varchar(50) COLLATE utf8_bin DEFAULT NULL,
-  PRIMARY KEY (`grupo_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `grupo`
---
-
-LOCK TABLES `grupo` WRITE;
-/*!40000 ALTER TABLE `grupo` DISABLE KEYS */;
-/*!40000 ALTER TABLE `grupo` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `instrutor`
 --
 
@@ -415,13 +376,14 @@ DROP TABLE IF EXISTS `instrutor`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `instrutor` (
+  `idinstrutor` int(11) NOT NULL AUTO_INCREMENT,
   `idpessoa` int(11) NOT NULL,
   `iddisciplina` int(11) NOT NULL,
-  `idinstrutor` int(11) NOT NULL AUTO_INCREMENT,
-  `instrutor` varchar(12) COLLATE utf8_bin NOT NULL,
+  `tipo_instrutor` varchar(12) COLLATE utf8_bin NOT NULL,
   `idturma` int(11) NOT NULL,
-  `desistencia` date DEFAULT NULL,
-  `datainscricao` date DEFAULT NULL,
+  `desistencia` char(1) COLLATE utf8_bin NOT NULL DEFAULT '0',
+  `datadesistencia` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `datainscricao` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `matricula` varchar(10) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`idinstrutor`),
   KEY `fk_instrutor_pessoa` (`idpessoa`),
@@ -430,7 +392,7 @@ CREATE TABLE `instrutor` (
   CONSTRAINT `fk_instrutor_disciplina` FOREIGN KEY (`iddisciplina`) REFERENCES `disciplina` (`iddisciplina`),
   CONSTRAINT `fk_instrutor_pessoa` FOREIGN KEY (`idpessoa`) REFERENCES `pessoa` (`idpessoa`),
   CONSTRAINT `fk_instrutor_turma` FOREIGN KEY (`idturma`) REFERENCES `turma` (`idturma`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -439,6 +401,7 @@ CREATE TABLE `instrutor` (
 
 LOCK TABLES `instrutor` WRITE;
 /*!40000 ALTER TABLE `instrutor` DISABLE KEYS */;
+INSERT INTO `instrutor` VALUES (1,1,1,'Titular',3,'0',NULL,'2017-01-03 02:04:23','950692-6');
 /*!40000 ALTER TABLE `instrutor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -450,13 +413,15 @@ DROP TABLE IF EXISTS `menu`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `menu` (
-  `menu_id` int(11) NOT NULL AUTO_INCREMENT,
-  `menu_descricao` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `idmenu` int(11) NOT NULL AUTO_INCREMENT,
+  `descricao` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `titulo` varchar(50) COLLATE utf8_bin DEFAULT NULL,
   `menu_pai` int(11) DEFAULT NULL,
-  PRIMARY KEY (`menu_id`),
+  `caminho` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`idmenu`),
   KEY `fk_menupai_menu` (`menu_pai`),
-  CONSTRAINT `fk_menupai_menu` FOREIGN KEY (`menu_pai`) REFERENCES `menu` (`menu_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  CONSTRAINT `fk_menupai_menu` FOREIGN KEY (`menu_pai`) REFERENCES `menu` (`idmenu`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -465,6 +430,7 @@ CREATE TABLE `menu` (
 
 LOCK TABLES `menu` WRITE;
 /*!40000 ALTER TABLE `menu` DISABLE KEYS */;
+INSERT INTO `menu` VALUES (1,'Menu Pai de Orgão','Orgão',NULL,NULL),(2,'Exibe orgãos','Exibir',1,'bootstrap.php?module=Orgao&page=index.php'),(3,'Adiciona orgãos','Adicionar',1,'bootstrap.php?module=Orgao&page=add.php'),(4,'Menu Pai de Pessoa','Pessoa',NULL,NULL),(5,'Exibe Pessoas','Exibir',4,'bootstrap.php?module=Pessoa&page=index.php'),(6,'Adiciona Pessoa','Adicionar',4,'bootstrap.php?module=Pessoa&page=add.php'),(7,'Menu Pai de Cursos','Curso',NULL,NULL),(8,'Exibe Cursos','Exibir',7,'bootstrap.php?module=Curso&page=index.php'),(9,'Adiciona Cursos','Adiciona',7,'bootstrap.php?module=Curso&page=add.php'),(10,'Menu Pai de Disciplina','Disciplina',NULL,NULL),(11,'Adiciona Disciplinas','Adiciona',10,'bootstrap.php?module=Disciplina&page=add.php'),(12,'Exibe Disciplinas','Exibir',10,'bootstrap.php?module=Disciplina&page=index.php'),(13,'Menu pai de Companhias','Companhia',NULL,NULL),(14,'Exibe Companhias','Exibir',13,'bootstrap.php?module=Companhia&page=index.php'),(15,'Adiciona Companhia','Adicionar',13,'bootstrap.php?module=Companhia&page=add.php'),(16,'Menu Pai Instrutor','Instrutor',NULL,NULL),(17,'Exibe Instrutores','Exibir',16,'bootstrap.php?module=Instrutor&page=index.php'),(18,'Menu pai Plano de Aula','Plano de Aula',NULL,NULL),(19,'Exibir Planos de Aula','Exibir',18,'bootstrap.php?module=PlanoAula&page=index.php');
 /*!40000 ALTER TABLE `menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -531,10 +497,10 @@ DROP TABLE IF EXISTS `perfil`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `perfil` (
-  `perfil_id` int(11) NOT NULL AUTO_INCREMENT,
-  `perfil_descricao` text COLLATE utf8_bin,
-  PRIMARY KEY (`perfil_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=DYNAMIC;
+  `idperfil` int(11) NOT NULL AUTO_INCREMENT,
+  `descricao` text COLLATE utf8_bin,
+  PRIMARY KEY (`idperfil`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -543,59 +509,35 @@ CREATE TABLE `perfil` (
 
 LOCK TABLES `perfil` WRITE;
 /*!40000 ALTER TABLE `perfil` DISABLE KEYS */;
+INSERT INTO `perfil` VALUES (1,'Acides'),(2,'Divisão de Ensino'),(3,'Aluno'),(4,'Instrutor'),(5,'Corpo de Alunos'),(6,'Conteudista');
 /*!40000 ALTER TABLE `perfil` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `perfil_funcionalidade`
+-- Table structure for table `perfil_menu`
 --
 
-DROP TABLE IF EXISTS `perfil_funcionalidade`;
+DROP TABLE IF EXISTS `perfil_menu`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `perfil_funcionalidade` (
-  `perfil_id` int(11) DEFAULT NULL,
-  `func_id` int(11) DEFAULT NULL,
-  KEY `fk_funcionalidade` (`perfil_id`),
-  KEY `fk_perfil` (`func_id`),
-  CONSTRAINT `fk_funcionalidade` FOREIGN KEY (`perfil_id`) REFERENCES `perfil` (`perfil_id`),
-  CONSTRAINT `fk_perfil` FOREIGN KEY (`func_id`) REFERENCES `funcionalidade` (`func_id`)
+CREATE TABLE `perfil_menu` (
+  `idperfil` int(11) DEFAULT NULL,
+  `idmenu` int(11) DEFAULT NULL,
+  KEY `fk_perfil` (`idperfil`),
+  KEY `fk_menu` (`idmenu`),
+  CONSTRAINT `fk_menu` FOREIGN KEY (`idmenu`) REFERENCES `menu` (`idmenu`),
+  CONSTRAINT `fk_perfil` FOREIGN KEY (`idperfil`) REFERENCES `perfil` (`idperfil`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `perfil_funcionalidade`
+-- Dumping data for table `perfil_menu`
 --
 
-LOCK TABLES `perfil_funcionalidade` WRITE;
-/*!40000 ALTER TABLE `perfil_funcionalidade` DISABLE KEYS */;
-/*!40000 ALTER TABLE `perfil_funcionalidade` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `perfil_grupo`
---
-
-DROP TABLE IF EXISTS `perfil_grupo`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `perfil_grupo` (
-  `perfil_id` int(11),
-  `grupo_id` int(11),
-  KEY `fk_perfil_grupo_grupo` (`grupo_id`),
-  KEY `fk_perfil_grupo_perfil` (`perfil_id`),
-  CONSTRAINT `fk_perfil_grupo_grupo` FOREIGN KEY (`grupo_id`) REFERENCES `grupo` (`grupo_id`),
-  CONSTRAINT `fk_perfil_grupo_perfil` FOREIGN KEY (`perfil_id`) REFERENCES `perfil` (`perfil_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `perfil_grupo`
---
-
-LOCK TABLES `perfil_grupo` WRITE;
-/*!40000 ALTER TABLE `perfil_grupo` DISABLE KEYS */;
-/*!40000 ALTER TABLE `perfil_grupo` ENABLE KEYS */;
+LOCK TABLES `perfil_menu` WRITE;
+/*!40000 ALTER TABLE `perfil_menu` DISABLE KEYS */;
+INSERT INTO `perfil_menu` VALUES (1,2),(1,3),(1,5),(1,6),(1,8),(1,9),(1,11),(1,12),(1,14),(1,15),(1,17),(1,19);
+/*!40000 ALTER TABLE `perfil_menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -607,17 +549,16 @@ DROP TABLE IF EXISTS `pessoa`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `pessoa` (
   `idpessoa` int(11) NOT NULL AUTO_INCREMENT,
-  `cargo` int(11) DEFAULT NULL,
-  `instituicao` varchar(8) COLLATE utf8_bin NOT NULL,
+  `idcargo` int(11) DEFAULT NULL,
   `nome` varchar(50) COLLATE utf8_bin NOT NULL,
   `cpf` varchar(15) COLLATE utf8_bin NOT NULL,
   `senha` varchar(32) COLLATE utf8_bin NOT NULL,
   `confirma` int(1) DEFAULT NULL,
   `email` varchar(50) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`idpessoa`),
-  KEY `fk_pessoa_cargo` (`cargo`),
-  CONSTRAINT `fk_pessoa_cargo` FOREIGN KEY (`cargo`) REFERENCES `cargo` (`idcargo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  KEY `fk_pessoa_cargo` (`idcargo`),
+  CONSTRAINT `fk_pessoa_cargo` FOREIGN KEY (`idcargo`) REFERENCES `cargo` (`idcargo`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -626,33 +567,35 @@ CREATE TABLE `pessoa` (
 
 LOCK TABLES `pessoa` WRITE;
 /*!40000 ALTER TABLE `pessoa` DISABLE KEYS */;
+INSERT INTO `pessoa` VALUES (1,1,'Antonio Ricardo Andrade Castelo Branco','02368666486','e10adc3949ba59abbe56e057f20f883e',1,'ricardo.castelobranco@live.com'),(2,1,'Sheila de Lima Castelo Branco','04204015476','123456',0,'sheilacastelo.b@hotmail.com');
 /*!40000 ALTER TABLE `pessoa` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `pessoa_grupo`
+-- Table structure for table `pessoa_perfil`
 --
 
-DROP TABLE IF EXISTS `pessoa_grupo`;
+DROP TABLE IF EXISTS `pessoa_perfil`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `pessoa_grupo` (
-  `pessoa_id` int(11) DEFAULT NULL,
-  `grupo_id` int(11) DEFAULT NULL,
-  KEY `fk_pessoa_grupo_pessoa` (`pessoa_id`),
-  KEY `fk_pessoa_grupo_grupo` (`grupo_id`),
-  CONSTRAINT `fk_pessoa_grupo_grupo` FOREIGN KEY (`grupo_id`) REFERENCES `grupo` (`grupo_id`),
-  CONSTRAINT `fk_pessoa_grupo_pessoa` FOREIGN KEY (`pessoa_id`) REFERENCES `pessoa` (`idpessoa`)
+CREATE TABLE `pessoa_perfil` (
+  `idperfil` int(11),
+  `idpessoa` int(11),
+  KEY `fk_perfil_pessoa` (`idperfil`),
+  KEY `fk_pessoa_perfil` (`idpessoa`),
+  CONSTRAINT `fk_perfil_pessoa` FOREIGN KEY (`idperfil`) REFERENCES `perfil` (`idperfil`),
+  CONSTRAINT `fk_pessoa_perfil` FOREIGN KEY (`idpessoa`) REFERENCES `pessoa` (`idpessoa`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `pessoa_grupo`
+-- Dumping data for table `pessoa_perfil`
 --
 
-LOCK TABLES `pessoa_grupo` WRITE;
-/*!40000 ALTER TABLE `pessoa_grupo` DISABLE KEYS */;
-/*!40000 ALTER TABLE `pessoa_grupo` ENABLE KEYS */;
+LOCK TABLES `pessoa_perfil` WRITE;
+/*!40000 ALTER TABLE `pessoa_perfil` DISABLE KEYS */;
+INSERT INTO `pessoa_perfil` VALUES (1,1);
+/*!40000 ALTER TABLE `pessoa_perfil` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -701,10 +644,11 @@ CREATE TABLE `planoaula` (
   `turno` varchar(5) COLLATE utf8_bin NOT NULL,
   `metodologia` varchar(300) COLLATE utf8_bin NOT NULL,
   `meios` varchar(300) COLLATE utf8_bin NOT NULL,
-  `envio` date NOT NULL,
   `avaliacao` varchar(300) COLLATE utf8_bin DEFAULT NULL,
   `qtdaula` int(2) DEFAULT NULL,
   `idaula` int(11) DEFAULT NULL,
+  `datacriacao` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `atualizacao` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`idplano`),
   KEY `fk_planoaula_instrutor` (`idinstrutor`),
   KEY `fk_planoaula_aula` (`idaula`),
@@ -754,13 +698,12 @@ DROP TABLE IF EXISTS `turma`;
 CREATE TABLE `turma` (
   `idturma` int(7) NOT NULL AUTO_INCREMENT,
   `companhia` int(11) NOT NULL,
-  `turma` varchar(3) COLLATE utf8_bin NOT NULL,
-  `datainicio` date NOT NULL,
-  `datafim` date DEFAULT NULL,
+  `turma` varchar(50) COLLATE utf8_bin NOT NULL,
+  `sala` varchar(10) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`idturma`),
   KEY `fk_turma_companhia` (`companhia`),
   CONSTRAINT `fk_turma_companhia` FOREIGN KEY (`companhia`) REFERENCES `companhia` (`idcompanhia`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -769,6 +712,7 @@ CREATE TABLE `turma` (
 
 LOCK TABLES `turma` WRITE;
 /*!40000 ALTER TABLE `turma` DISABLE KEYS */;
+INSERT INTO `turma` VALUES (1,2,'B1','13'),(2,2,'B2','12'),(3,1,'A1','10'),(4,3,'A1','1');
 /*!40000 ALTER TABLE `turma` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -781,4 +725,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-12-29 14:23:30
+-- Dump completed on 2017-01-02 23:32:13

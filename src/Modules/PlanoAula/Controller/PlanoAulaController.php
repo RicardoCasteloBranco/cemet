@@ -1,13 +1,16 @@
 <?php
 namespace CasteloBranco\Cemet\Modules\PlanoAula\Controller;
 use CasteloBranco\Cemet\Interfaces\IController;
+session_start();
 /**
  * Description of PlanoAulaController
- *
+ *  
  * @author ricardo
  */
 class PlanoAulaController implements IController{
     public function addAction() {
+        $aulas = \CasteloBranco\Cemet\Modules\Aula\Model\AulaTabela::findAll();
+        
         if(filter_input(INPUT_SERVER, "REQUEST_METHOD") == "POST"){
             $dados = filter_input_array(INPUT_POST);
             $classe = \CasteloBranco\Cemet\Factory\Creator::
@@ -15,6 +18,9 @@ class PlanoAulaController implements IController{
             \CasteloBranco\Cemet\Modules\PlanoAula\Model\PlanoAulaTabela::insert($classe);
             header();
         }
+        return array(
+            "aulas" => $aulas
+        );
     }
 
     public function deleteAction() {
@@ -37,10 +43,17 @@ class PlanoAulaController implements IController{
     }
 
     public function indexAction() {
-        $planos = \CasteloBranco\Cemet\Modules\PlanoAula\Model\PlanoAulaTabela::findAll();
+        $pessoa = unserialize($_SESSION["pessoa"]);
+        
+        $disciplinas = \CasteloBranco\Cemet\Modules\PlanoAula\Model\PlanoAulaTabela::
+                showDisciplinas($pessoa->getIdPessoa());
         return array(
-            "planos" => $planos
+            "disciplinas" => $disciplinas
         );
+    }
+    
+    public function showAction(){
+        
     }
 
 }

@@ -13,13 +13,24 @@ class PlanoAula extends Product{
     private $turno;
     private $metodologia;
     private $meios;
-    private $envio;
     private $avaliacao;
     private $qtdAula;
     private $idAula;
-    
-    public function __construct() {
-        
+    private $dataCriacao;
+    private $atualizacao;
+
+
+    public function __construct(array $dados) {
+        $this->setIdPlano(isset($dados["idplano"])?$dados["idplano"]:0)
+             ->setAtualizacao($dados["atualizacao"])
+             ->setAvaliacao($dados["avaliacao"])
+             ->setData($dados["data"])
+             ->setIdAula($dados["idaula"])
+             ->setIdInstrutor($dados["idinstrutor"])
+             ->setMeios($dados["meios"])
+             ->setMetodologia($dados["metodologia"])
+             ->setQtdAula($dados["qtdaula"])
+             ->setTurno($dados["turno"]);
     }
     
     public function getIdPlano() {
@@ -46,10 +57,6 @@ class PlanoAula extends Product{
         return $this->meios;
     }
 
-    public function getEnvio() {
-        return $this->envio;
-    }
-
     public function getAvaliacao() {
         return $this->avaliacao;
     }
@@ -61,7 +68,16 @@ class PlanoAula extends Product{
     public function getIdAula() {
         return $this->idAula;
     }
+    
+    public function getDataCriacao() {
+        return $this->dataCriacao;
+    }
 
+    public function getAtualizacao() {
+        return $this->atualizacao;
+    }
+
+    
     public function setIdPlano($idPlano) {
         $this->idPlano = $idPlano;
         return $this;
@@ -92,11 +108,6 @@ class PlanoAula extends Product{
         return $this;
     }
 
-    public function setEnvio($envio) {
-        $this->envio = $envio;
-        return $this;
-    }
-
     public function setAvaliacao($avaliacao) {
         $this->avaliacao = $avaliacao;
         return $this;
@@ -112,6 +123,17 @@ class PlanoAula extends Product{
         return $this;
     }
     
+    public function setDataCriacao($dataCriacao) {
+        $this->dataCriacao = $dataCriacao;
+        return $this;
+    }
+
+    public function setAtualizacao($atualizacao) {
+        $this->atualizacao = $atualizacao;
+        return $this;
+    }
+
+        
     public function getParams() {
         return array(
             "idplano" => \PDO::PARAM_INT,

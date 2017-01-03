@@ -37,7 +37,19 @@ class PlanoAulaTabela implements ITabela{
     }
 
     public static function update($classeAnt, $classePos) {
-        
+        $tr = self::getInstancia();
+        $tr->update($classeAnt, $classePos);
+    }
+    
+    public static function showDisciplinas($idpessoa){
+        $tr = new \CasteloBranco\Cemet\Data\Transation("disciplina");
+        $table = $tr->getTable();
+        $table->setJoin("INNER","instrutor","disciplina","iddisciplina","iddisciplina");
+        $table->setJoin("INNER","curso","disciplina","idcurso","idcurso");
+        $table->setJoin("INNER","turma","instrutor","idturma","idturma");
+        $table->setWhere(["datadesistencia" => NULL, "idpessoa" => $idpessoa]);
+        $tr->setTable($table);
+        return $tr->findAll();
     }
 
 }
