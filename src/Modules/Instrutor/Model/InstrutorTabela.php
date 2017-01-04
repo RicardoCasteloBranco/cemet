@@ -25,19 +25,17 @@ class InstrutorTabela implements ITabela{
     }
 
     public static function findAll() {
-        $cols = ["disciplina.iddisciplina","disciplina.disciplina","disciplina.sigla", "instrutor.idinstrutor", "instrutor.idpessoa",
-"turma.idturma","(SELECT pessoa.nome FROM pessoa WHERE pessoa.idpessoa = instrutor.idpessoa) as instrutor",
-"instrutor.matricula","instrutor.tipo_instrutor","instrutor.datainscricao","instrutor.datadesistencia"];
-        $tr = new \CasteloBranco\Cemet\Data\Transation("disciplina");
-        $table = $tr->getTable();
-        $table->setCols($cols);
-        $table->setJoin("INNER","curso","disciplina","idcurso","idcurso");
-        $table->setJoin("INNER","companhia","curso","idcurso","idcurso");
-        $table->setJoin("INNER","turma","companhia","companhia","idcompanhia");
-        $table->setJoin("LEFT","instrutor","turma","idturma","idturma");
-        $table->setHaving(["idturma" => IDTURMA]);
-        $tr->setTable($table);
-        return $tr->findAll();
+        $sql = "SELECT * 
+                FROM disciplina 
+                LEFT JOIN companhia ON(companhia.idcurso=disciplina.idcurso) 
+                LEFT JOIN turma ON(turma.companhia=companhia.idcompanhia)
+                LEFT JOIN instrutor ON (instrutor.idturma = turma.idturma AND instrutor.iddisciplina = disciplina.iddisciplina)
+                LEFT JOIN pessoa ON (pessoa.idpessoa = instrutor.idpessoa)
+                LEFT JOIN cargo ON (cargo.idcargo = pessoa.idcargo)
+                LEFT JOIN orgao ON (orgao.idorgao = cargo.idorgao)
+                HAVING turma.idturma LIKE '".IDTURMA."';";
+        $ds = new \CasteloBranco\Cemet\Data\DataSet();
+        return $ds->table($sql);
     }
 
     public static function insert($classe) {

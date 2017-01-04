@@ -1,7 +1,7 @@
 <?php
 $ger = new \CasteloBranco\Cemet\Modules\Instrutor\Controller\InstrutorController();
 $dados = $ger->editAction();
-$instrutor = $dados["instrutor"];
+$inst = $dados["instrutor"];
 $disciplina = $dados["disciplina"];
 $pessoa = $dados["pessoa"];
 $turma = $dados["turma"];
@@ -25,8 +25,8 @@ $curso = $dados["curso"];
     </div>
     <div>
         <label for="tipo_instrutor">Tipo de Instrutor</label>
-        <input type="hidden" name="tipo_instrutor" value="<?php echo $instrutor->getTipoInstrutor(); ?>">
-        <input type="text" value="<?php echo $instrutor->getTipoInstrutor(); ?>" disabled="true">
+        <input type="hidden" name="tipo_instrutor" value="<?php echo $inst->getTipoInstrutor(); ?>">
+        <input type="text" value="<?php echo $inst->getTipoInstrutor(); ?>" disabled="true">
     </div>
     <div>
         <input type="submit" name="btn_action" value="Busca">

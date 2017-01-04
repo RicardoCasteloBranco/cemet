@@ -30,7 +30,7 @@ iframe[name="exibe"]{position:absolute;height: 70%; width: 90%;}
 *Configuração da página
 */
 h1, h2, h3{font-family:Arial; color:maroon; text-align: center;}
-#bem_vindo{font-style: italic; width:80%; margin: 1% 8% 1% 0; text-align: right; }
+#bem_vindo{font-style: italic; width:90%; margin: 1% 0 1% 0; text-align: right; }
 #local{width: 100%; text-align: center;}
 /*
 *Estilo para tabela
