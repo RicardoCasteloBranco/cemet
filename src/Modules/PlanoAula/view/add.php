@@ -1,10 +1,11 @@
 <?php
 $ger = new \CasteloBranco\Cemet\Modules\PlanoAula\Controller\PlanoAulaController();
 $dados = $ger->addAction();
+$instrutor = $dados['instrutor'];
 ?>
 <h2>Plano de Aula</h2>
 <form method="post" action="">
-        <input type="hidden" name="idinstrutor" value="">
+        <input type="hidden" name="idinstrutor" value="<?php echo $instrutor->getIdInstrutor();?>">
     <div>
         <label for="data">Data</label>
         <input type="date" name="data">
@@ -38,5 +39,8 @@ $dados = $ger->addAction();
     <div>
         <label for="avaliacao">Avaliação</label>
         <textarea name="avaliacao"></textarea>
+    </div>
+    <div>
+        <input type="submit" name="btn_add" value="Adiciona">
     </div>
 </form>

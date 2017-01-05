@@ -27,6 +27,8 @@ class PlanoAulaTabela implements ITabela{
     public static function findAll() {
         $tr = self::getInstancia();
         $table = $tr->getTable();
+        $table->setJoin("INNER","pladis","planoaula","idaula","idaula");
+        $table->setWhere(["idinstrutor" => IDINSTRUTOR]);
         $tr->setTable($table);
         return $tr->findAll();
     }

@@ -28,7 +28,7 @@ class SelectData extends DataSet{
         $cmd .= substr($this->getGroup(),0,-1).$this->space($this->having);
         $cmd .= $this->getHaving().$this->space($this->order);
         $cmd .= substr($this->getOrder(),0,-1).$this->space($this->limit);
-        $cmd .= substr($this->getLimit(),0,-1).";";
+        $cmd .= substr($this->getLimit(),0,-1).";";        
         return $cmd;
     }
     

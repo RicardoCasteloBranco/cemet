@@ -11,7 +11,8 @@
         "php" : ">=5.6",
         "ikimea/browser" : "^1.12",
         "phpmailer/phpmailer" : "^5.2",
-        "league/oauth2-google" : "^1.0.0"
+        "league/oauth2-google" : "^1.0.0",
+        "setasign/fpdf": "^1.8"
     },
     "autoload": {
         "psr-4": {

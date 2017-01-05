@@ -22,9 +22,10 @@ class PlanoAula extends Product{
 
     public function __construct(array $dados) {
         $this->setIdPlano(isset($dados["idplano"])?$dados["idplano"]:0)
-             ->setAtualizacao($dados["atualizacao"])
+             ->setAtualizacao(isset($dados["atualizacao"])?$dados["atualizacao"]:null)
              ->setAvaliacao($dados["avaliacao"])
              ->setData($dados["data"])
+             ->setDataCriacao(isset($dados["datacriacao"])?$dados["datacriacao"]:null)
              ->setIdAula($dados["idaula"])
              ->setIdInstrutor($dados["idinstrutor"])
              ->setMeios($dados["meios"])
