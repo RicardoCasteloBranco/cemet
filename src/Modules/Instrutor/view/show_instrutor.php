@@ -6,6 +6,7 @@ $curso = $dados["curso"];
 $cia = $dados["companhia"];
 ?>
 <h2><?php echo "Instrutores: ".$turma->getTurma()." - ".$cia->getCompanhia()." - ".$curso->getSiglaCurso()."/".date("Y",strtotime($cia->getDataInicio())); ?></h2>
+<button onclick="location.href='?module=Instrutor&page=show_turma.php&idcompanhia=<?php echo $turma->getCompanhia(); ?>'">Voltar</button>
 <table class="sortable">
     <thead>
         <tr>

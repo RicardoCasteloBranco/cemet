@@ -12,13 +12,13 @@ class PlanoAulaController implements IController{
         $instrutor = \CasteloBranco\Cemet\Modules\Instrutor\Model\InstrutorTabela::
                 find(["idinstrutor" => filter_input(INPUT_GET,"idinstrutor")]);
         define("IDDISCIPLINA", $instrutor->getIdDisciplina());
-        $aulas = \CasteloBranco\Cemet\Modules\Aula\Model\AulaTabela::findAll();       
+        $aulas = \CasteloBranco\Cemet\Modules\Aula\Model\AulaTabela::findAll();
         if(filter_input(INPUT_SERVER, "REQUEST_METHOD") == "POST"){
             $dados = filter_input_array(INPUT_POST);
             $classe = \CasteloBranco\Cemet\Factory\Creator::
                     factoryMethod(\CasteloBranco\Cemet\Modules\PlanoAula\Model\PlanoAula::class, $dados);
             \CasteloBranco\Cemet\Modules\PlanoAula\Model\PlanoAulaTabela::insert($classe);
-            header("location=?module=PlanoAula&page=show.php&idinstrutor=".$instrutor->getIdInstrutor());
+            header("location:?module=PlanoAula&page=show.php&idinstrutor=".$instrutor->getIdInstrutor());
         }
         return array(
             "aulas" => $aulas, "instrutor" => $instrutor
@@ -31,16 +31,22 @@ class PlanoAulaController implements IController{
 
     public function editAction() {
         $planoAula = \CasteloBranco\Cemet\Modules\PlanoAula\Model\PlanoAulaTabela::
-                find(["idplano" => filter_input(INPUT_GET,"idplano")]);
+                find(["idplano" => filter_input(INPUT_GET,"idplano")]);       
+        
+        $instrutor = \CasteloBranco\Cemet\Modules\Instrutor\Model\InstrutorTabela::
+                find(["idinstrutor" => $planoAula->getIdInstrutor()]);
+        
+        define("IDDISCIPLINA", $instrutor->getIdDisciplina());
+        $aulas = \CasteloBranco\Cemet\Modules\Aula\Model\AulaTabela::findAll();
         if(filter_input(INPUT_SERVER, "REQUEST_METHOD") == "POST"){
             $dados = filter_input_array(INPUT_POST);
             $classe = \CasteloBranco\Cemet\Factory\Creator::
                     factoryMethod(\CasteloBranco\Cemet\Modules\PlanoAula\Model\PlanoAula::class, $dados);
             \CasteloBranco\Cemet\Modules\PlanoAula\Model\PlanoAulaTabela::update($planoAula, $classe);
-            header();
+            header("location:?module=PlanoAula&page=show.php&idinstrutor=".$instrutor->getIdInstrutor());
         }
         return array(
-            "planoaula" => $planoAula
+            "planoaula" => $planoAula, "instrutor" => $instrutor, "aulas" => $aulas
         );
     }
 

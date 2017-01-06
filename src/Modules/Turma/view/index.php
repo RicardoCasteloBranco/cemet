@@ -28,9 +28,9 @@ $companhia = $dados["companhia"];
             <td>
                 <a href="?module=Turma&page=edit.php&idturma=<?php echo $row->idturma; ?>">Editar Turma</a>
                 |
+                <?php if(is_null($row->coordenador)):?>
                 <a href="?module=Coordenador&page=add.php&idturma=<?php echo $row->idturma; ?>">Inserir Coordenador</a>
-                <?php if(!is_null($row->coordenador)):?>
-                |
+                <?php else:?>
                 <a href="?module=Coordenador&page=edit.php&idturma=<?php echo $row->idturma; ?>">Alterar Coordenador</a>
                 <?php endif; ?>
             </td>
