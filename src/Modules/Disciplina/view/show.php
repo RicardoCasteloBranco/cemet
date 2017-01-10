@@ -36,3 +36,9 @@ $curso = $dados["curso"];
         <?php endforeach; ?>
     </tbody>
 </table>
+<div id="pageNav"></div>
+        <script>var pager = new Pager('tabela',10);
+            pager.init();
+            pager.showPageNav('pager','pageNav');
+            pager.showPage(1);
+        </script>

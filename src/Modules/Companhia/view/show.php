@@ -7,7 +7,7 @@ $curso = $dados["curso"];
 
 <button onclick="location.href='?module=Companhia&page=index.php'">Voltar</button>
 
-<table class="sortable">
+<table class="sortable" id="tabela">
     <thead>
         <tr>
             <th>Companhia</th><th>Local</th><th>Data de Inicio</th>
@@ -28,3 +28,9 @@ $curso = $dados["curso"];
     </tr>
     <?php endforeach; ?>
 </table>
+<div id="pageNav"></div>
+        <script>var pager = new Pager('tabela',10);
+            pager.init();
+            pager.showPageNav('pager','pageNav');
+            pager.showPage(1);
+        </script>

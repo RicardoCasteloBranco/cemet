@@ -10,6 +10,8 @@ Principal to Application
         <link href="css/menu.css" rel="stylesheet" type="text/css">
         <script src="jscript/mascara.js" type="text/javascript"></script>
         <?php
+        ini_set("display_errors",1);
+        error_reporting(E_ALL);
         include filter_input(INPUT_SERVER, "DOCUMENT_ROOT")."/cemet/vendor/autoload.php";
         $ger = new \CasteloBranco\Cemet\Modules\Application\Controller\ApplicationController();
         $dados = $ger->loginAction();

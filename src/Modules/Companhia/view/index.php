@@ -3,7 +3,7 @@ $ger = new CasteloBranco\Cemet\Modules\Curso\Controller\CursoController();
 $dados = $ger->indexAction();
 ?>
 <h2>Cursos</h2>
-<table class="sortable">
+<table class="sortable" id="tabela">
     <thead>
         <tr>
             <th>Curso</th><th>Sigla</th><th>Orgão</th><th>Ação</th>
@@ -22,3 +22,9 @@ $dados = $ger->indexAction();
         <?php endforeach; ?>
     </tbody>
 </table>
+<div id="pageNav"></div>
+<script>var pager = new Pager('tabela',10);
+            pager.init();
+            pager.showPageNav('pager','pageNav');
+            pager.showPage(1);
+        </script>
