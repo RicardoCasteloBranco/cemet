@@ -39,5 +39,53 @@ class AlunoTabela implements ITabela{
         $tr = self::getInstancia();
         $tr->update($classeAnt, $classePos);
     }
-
+    
+    public static function tabelaCursosFora(){
+        $tr = new \CasteloBranco\Cemet\Data\Transation("cursos_fora");
+        $table = $tr->getTable();
+        $tr->setTable($table);
+        return $tr->findAll();
+    }
+    
+    public static function tabelaGeneros(){
+        $tr = new \CasteloBranco\Cemet\Data\Transation('genero');
+        $table = $tr->getTable();
+        $tr->setTable($table);
+        return $tr->findAll();
+    }
+    
+    public static function tabelaEstadoCivil(){
+        $tr = new \CasteloBranco\Cemet\Data\Transation('estado_civil');
+        $table = $tr->getTable();
+        $tr->setTable($table);
+        return $tr->findAll();
+    }
+    
+    public static function tabelaReligiao(){
+        $tr = new \CasteloBranco\Cemet\Data\Transation('religiao');
+        $table = $tr->getTable();
+        $tr->setTable($table);
+        return $tr->findAll();
+    }
+    
+    public static function tabelaGrauInstrucao(){
+        $tr = new \CasteloBranco\Cemet\Data\Transation('grau_instrucao');
+        $table = $tr->getTable();
+        $tr->setTable($table);
+        return $tr->findAll();
+    }
+    
+    public static function tabelaEstados(){
+        $tr = new \CasteloBranco\Cemet\Data\Transation('estados');
+        $table = $tr->getTable();
+        $tr->setTable($table);
+        return $tr->findAll();
+    }
+    
+    public static function tabelaCidades(){
+        $tr = new \CasteloBranco\Cemet\Data\Transation('cidades');
+        $table = $tr->getTable();
+        $tr->setTable($table);
+        return $tr->findAll();
+    }
 }

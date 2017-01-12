@@ -1,8 +1,8 @@
 <?php
 $ger = new CasteloBranco\Cemet\Modules\Aluno\Controller\AlunoController();
 $dados = $ger->addAction();
-var_dump(filter_input(INPUT_POST, "categoria"));
 ?>
+<h2>Cadastro de Alunos</h2>
 <form method="post" action="">
     <fieldset>
         <legend>Dados Pessoais</legend>
@@ -14,13 +14,17 @@ var_dump(filter_input(INPUT_POST, "categoria"));
         <div>
             <label for="estadocivil">Estado civil:</label>
             <select name="estadocivil">
-                <option></option>
+                <?php foreach($dados["estado_civil"] as $opt):?>
+                <option value="<?php echo $opt->idestadocivil ?>"><?php echo $opt->estado_civil ?></option>
+                <?php endforeach; ?>
             </select>
         </div>
         <div>
             <label for="genero">Gênero</label>
             <select form="genero">
-                <option></option>
+                <?php foreach($dados["genero"] as $opt):?>
+                <option value="<?php echo $opt->idgenero ?>"><?php echo $opt->genero ?></option>
+                <?php endforeach; ?>
             </select>
         </div>
         <div>
@@ -65,13 +69,11 @@ var_dump(filter_input(INPUT_POST, "categoria"));
         </div>
         <div>
             <label for="categoria">Categoria</label>
-            <select name="categoria" multiple="true">
-                <option>A</option>
-                <option>B</option>
-                <option>C</option>
-                <option>D</option>
-                <option>E</option>
-            </select>
+            <input type="checkbox" name="categoria" value="A">A
+            <input type="checkbox" name="categoria" value="B">B
+            <input type="checkbox" name="categoria" value="C">C
+            <input type="checkbox" name="categoria" value="D">D
+            <input type="checkbox" name="categoria" value="E">E
         </div>
         </fieldset>
     <fieldset>
@@ -113,11 +115,19 @@ var_dump(filter_input(INPUT_POST, "categoria"));
             <label for="uf">UF:</label>
             <select name="uf">
                 <option></option>
+                <?php foreach($dados["estados"] as $opt):?>
+                <option value="<?php echo $opt->idestado ?>"><?php echo $opt->uf ?></option>
+                <?php endforeach; ?>
             </select>
         </div>
         <div>
             <label for="cidade">Cidade</label>
-            <input type="text" name="cidade">
+            <select name="cidade">
+                <option></option>
+                <?php foreach($dados["cidades"] as $opt):?>
+                <option value="<?php echo $opt->idcidade ?>"><?php echo $opt->nome ?></option>
+                <?php endforeach; ?>
+            </select>
         </div>
         <div>
             <label for="bairro">Bairro</label>
@@ -133,13 +143,18 @@ var_dump(filter_input(INPUT_POST, "categoria"));
         <div>
             <label for="graudeinstrucao">Grau de Instrução</label>
             <select name="graudeinstrucao">
-                <option></option>
+                <?php foreach($dados["grau_instrucao"] as $opt):?>
+                <option value="<?php echo $opt->idgrauinstrucao ?>"><?php echo $opt->grau_instrucao ?></option>
+                <?php endforeach; ?>
             </select>
         </div>
         <div>
             <label for="curso_formacao">Curso:</label>
             <select name="curso_formacao">
                 <option></option>
+                <?php foreach($dados["cursos"] as $opt):?>
+                <option value="<?php echo $opt->idcursosfora ?>"><?php echo $opt->nome_curso; ?></option>
+                <?php endforeach; ?>
             </select>
         </div>
     </fieldset>

@@ -21,6 +21,15 @@ class AlunoController implements IController{
             \CasteloBranco\Cemet\Modules\Aluno\Model\AlunoTabela::insert($classe);
             header();
         }
+        return array(
+            "cidades" => \CasteloBranco\Cemet\Modules\Aluno\Model\AlunoTabela::tabelaCidades(),
+            "estados" => \CasteloBranco\Cemet\Modules\Aluno\Model\AlunoTabela::tabelaEstados(),
+            "estado_civil" => \CasteloBranco\Cemet\Modules\Aluno\Model\AlunoTabela::tabelaEstadoCivil(),
+            "genero" => \CasteloBranco\Cemet\Modules\Aluno\Model\AlunoTabela::tabelaGeneros(),
+            "cursos" => \CasteloBranco\Cemet\Modules\Aluno\Model\AlunoTabela::tabelaCursosFora(),
+            "grau_instrucao" => \CasteloBranco\Cemet\Modules\Aluno\Model\AlunoTabela::tabelaGrauInstrucao(),
+            "religiao" => \CasteloBranco\Cemet\Modules\Aluno\Model\AlunoTabela::tabelaReligiao()
+        );
     }
 
     public function deleteAction() {
