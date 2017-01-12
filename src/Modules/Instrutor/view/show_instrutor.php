@@ -18,11 +18,11 @@ $cia = $dados["companhia"];
     <tbody>
         <?php foreach($dados["instrutores"] as $row): ?>
         <tr>
-            <td><?php echo $row->disciplina; ?></td>
-            <td><?php echo $row->abreviatura; ?></td>
-            <td><?php echo $row->nome; ?></td>
-            <td><?php echo $row->email; ?></td>
-            <td><?php echo $row->tipo_instrutor; ?></td>
+            <td><?php echo is_null($row->disciplina)?NULL:$row->disciplina; ?></td>
+            <td><?php echo is_null($row->abreviatura)?NULL:$row->abreviatura; ?></td>
+            <td><?php echo is_null($row->nome)?NULL:$row->nome; ?></td>
+            <td><?php echo is_null($row->email)?NULL:$row->email; ?></td>
+            <td><?php echo is_null($row->tipo_instrutor)?NULL:$row->tipo_instrutor; ?></td>
             <td><?php echo is_null($row->datainscricao)?NULL:date("d/m/Y",strtotime($row->datainscricao)); ?></td>
             <td><?php echo is_null($row->datadesistencia)?NULL:date("d/m/Y",strtotime($row->datadesistencia)); ?></td>
             <td>

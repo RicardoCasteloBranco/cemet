@@ -12,7 +12,7 @@ class DataSet {
     
     public function setParams(array $params) {
         $this->params = array();
-        $this->params = $params;
+        $this->params = array_merge($this->params,$params);
     }
         
     private function init($sql){

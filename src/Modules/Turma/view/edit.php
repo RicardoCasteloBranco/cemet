@@ -16,6 +16,6 @@ $turma = $dados["turma"];
         <input type="text" name="sala" value="<?php echo $turma->getSala(); ?>">
     </div>
     <div>
-        <input type="submit" name="bnt_confirma" value="Atualiza">
+        <input type="submit" name="bnt_confirma" value="Atualiza" class="botao">
     </div>
 </form>

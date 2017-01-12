@@ -14,6 +14,10 @@ class AlunoController implements IController{
             $classe = \CasteloBranco\Cemet\Factory\Creator::
                     factoryMethod(\CasteloBranco\Cemet\Modules\Aluno\Model\Aluno::class,
                             $dados);
+            $pessoa = $classe->getPessoa();
+            $idPessoa = \CasteloBranco\Cemet\Modules\Pessoa\Model\PessoaTabela::
+                    insert($pessoa);
+            $classe->setIdPessoa($idPessoa);
             \CasteloBranco\Cemet\Modules\Aluno\Model\AlunoTabela::insert($classe);
             header();
         }

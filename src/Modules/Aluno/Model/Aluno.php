@@ -1,12 +1,12 @@
 <?php
 namespace CasteloBranco\Cemet\Modules\Aluno\Model;
-use CasteloBranco\Cemet\Factory\Product;
+use CasteloBranco\Cemet\Modules\Pessoa\Model\Pessoa;
 /**
  * Description of Aluno
  *
  * @author antonio
  */
-class Aluno extends Product{
+class Aluno extends Pessoa{
     private $idAluno;
     private $idPessoa;
     private $idTurma;
@@ -89,6 +89,11 @@ class Aluno extends Product{
              ->setTelefone($dados["telefone"])
              ->setTelefoneContato($dados["telefonecontato"])
              ->setValidadeHabilitacao($dados["validadehabilitacao"]);
+        parent::setCpf($dados["cpf"])
+              ->setEmail($dados["email"])
+              ->setIdCargo($dados["idcargo"])
+              ->setNome($dados["nome"])
+              ->setSenha($dados["senha"]);
     }
     
     public function getIdAluno() {
@@ -249,6 +254,10 @@ class Aluno extends Product{
 
     public function getMotivoDesligamento() {
         return $this->motivoDesligamento;
+    }
+    
+    public function getPessoa(){
+        return parent::class;
     }
 
     public function setIdAluno($idAluno) {

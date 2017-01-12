@@ -10,8 +10,6 @@ Principal to Application
         <link href="css/menu.css" rel="stylesheet" type="text/css">
         <script src="jscript/mascara.js" type="text/javascript"></script>
         <?php
-        ini_set("display_errors",1);
-        error_reporting(E_ALL);
         include filter_input(INPUT_SERVER, "DOCUMENT_ROOT")."/cemet/vendor/autoload.php";
         $ger = new \CasteloBranco\Cemet\Modules\Application\Controller\ApplicationController();
         $dados = $ger->loginAction();
@@ -26,6 +24,7 @@ Principal to Application
             <div id="login">
                 <h2>Login</h2>
                 <form method="post" action="" name="fm_login">
+                    <fieldset>
                     <div>
                         <label for="cpf">CPF:</label>
                         <input type="text" name="cpf" onkeypress="formatar_mascara(this,'###.###.###-##')" id="campo">
@@ -37,6 +36,7 @@ Principal to Application
                     <div>
                         <input type="submit" name="btn_confirma" value="Confirma">
                     </div>
+                    </fieldset>
                 </form>
             </div>
         </header>

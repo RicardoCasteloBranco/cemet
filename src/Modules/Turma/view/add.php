@@ -14,6 +14,6 @@ $dados = $ger->addAction();
         <input type="text" name="sala">
     </div>
     <div>
-        <input type="submit" name="bnt_confirma" value="Adiciona">
+        <input type="submit" name="bnt_confirma" value="Adiciona" class="botao">
     </div>
 </form>

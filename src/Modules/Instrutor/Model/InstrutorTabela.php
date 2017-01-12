@@ -25,17 +25,23 @@ class InstrutorTabela implements ITabela{
     }
 
     public static function findAll() {
-        $sql = "SELECT * 
-                FROM disciplina 
-                LEFT JOIN companhia ON(companhia.idcurso=disciplina.idcurso) 
-                LEFT JOIN turma ON(turma.companhia=companhia.idcompanhia)
-                LEFT JOIN instrutor ON (instrutor.idturma = turma.idturma AND instrutor.iddisciplina = disciplina.iddisciplina)
-                LEFT JOIN pessoa ON (pessoa.idpessoa = instrutor.idpessoa)
-                LEFT JOIN cargo ON (cargo.idcargo = pessoa.idcargo)
-                LEFT JOIN orgao ON (orgao.idorgao = cargo.idorgao)
-                HAVING turma.idturma LIKE '".IDTURMA."';";
-        $ds = new \CasteloBranco\Cemet\Data\DataSet();
-        return $ds->table($sql);
+        $cols = ["disciplina.iddisciplina", "turma.idturma","instrutor.idinstrutor",
+                "turma.turma","turma.sala","instrutor.idpessoa", "instrutor.tipo_instrutor",
+                "instrutor.desistencia", "instrutor.datadesistencia", "instrutor.datainscricao",
+                "disciplina.disciplina", "pessoa.nome", "pessoa.email", "cargo.abreviatura"];
+        $tr = new \CasteloBranco\Cemet\Data\Transation("disciplina");
+        $table = $tr->getTable();
+        $table->setCols($cols);
+        $table->setJoin("LEFT","companhia","disciplina","idcurso","idcurso");
+        $table->setJoin("LEFT","turma","companhia","companhia","idcompanhia");
+        $table->setJoin("LEFT","instrutor","turma","idturma","idturma AND "
+                . "instrutor.iddisciplina = disciplina.iddisciplina");
+        $table->setJoin("LEFT","pessoa","instrutor","idpessoa","idpessoa");
+        $table->setJoin("LEFT","cargo","pessoa","idcargo","idcargo");
+        $table->setJoin("LEFT","orgao","cargo","idorgao","idorgao");
+        $table->setHaving(["idturma" => IDTURMA]);
+        $tr->setTable($table);
+        return $tr->findAll();
     }
 
     public static function insert($classe) {

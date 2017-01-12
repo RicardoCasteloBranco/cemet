@@ -113,6 +113,7 @@ class SelectData extends DataSet{
             foreach ($this->having as $str => $v){
                 $termos .= "$str LIKE :$str AND ";
                 $this->values = array_merge($this->values,[$str => $v]);
+                parent::setParams([$str => \PDO::PARAM_STR]);
             }
             $having .= substr($termos,0,-4);
         }
