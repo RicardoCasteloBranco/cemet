@@ -7,16 +7,24 @@ $dados = $ger->addAction();
         var s1 = document.getElementById(s1);
         var s2 = document.getElementById(s2);
         s2.innerHTML = "";
-        <?php $estado = 0;   foreach ($dados["cidades"] as $cid): ?>
+        <?php $estado = 0; $end = false; foreach ($dados["cidades"] as $cid): ?>
             <?php if($cid->estado != $estado): ?>
-                if(s1.value == <?php echo $cid->estado; $estado = $cid->estado; ?>){
+                if(s1.value == <?php echo $cid->estado; ?>){
                     var optionArray = [
             <?php endif; ?>
                     "<?php echo $cid->idcidade."|".$cid->nome;?>",
-            <?php if($cid->estado != $estado): ?>
+            <?php $cidNext = next($dados["cidade"]); if($cidNext->estado != $estado): ?>
                 ];
             <?php endif; ?>
         <?php    endforeach; ?>
+        }
+        for(var option in optionArray){
+		var pair = optionArray[option].split("|");
+		var newOption = document.createElement("option");
+		newOption.value = pair[0];
+		newOption.innerHTML = pair[1];
+		s2.options.add(newOption);
+	}
     }
 </script>
 <h2>Cadastro de Alunos</h2>
