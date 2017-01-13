@@ -13,6 +13,7 @@ class Companhia extends Product{
     private $idcurso;
     private $dataInicio;
     private $dataTermino;
+    private $comandante;
     
     public function __construct(array $dados) {
         $this->setIdCompanhia(isset($dados["idcompanhia"])?$dados["idcompanhia"]:0)
@@ -20,7 +21,8 @@ class Companhia extends Product{
              ->setIdCurso($dados["idcurso"])
              ->setLocal($dados["local"])
              ->setDataInicio($dados["data_inicio"])
-             ->setDataTermino($dados["data_termino"]);
+             ->setDataTermino($dados["data_termino"])
+             ->setComandante($dados["comandante"]);
     }
     
     public function getIdCompanhia() {
@@ -46,8 +48,11 @@ class Companhia extends Product{
     public function getDataTermino() {
         return $this->dataTermino;
     }
-
     
+    public function getComandante() {
+        return $this->comandante;
+    }
+        
     public function setIdCompanhia($idCompanhia) {
         $this->idCompanhia = $idCompanhia;
         return $this;
@@ -77,7 +82,11 @@ class Companhia extends Product{
         $this->dataTermino = $dataTermino;
         return $this;
     }
-
+    
+    public function setComandante($comandante) {
+        $this->comandante = $comandante;
+        return $this;
+    }
             
     public function getParams() {
         return array(
@@ -86,7 +95,8 @@ class Companhia extends Product{
             "local" => \PDO::PARAM_STR,
             "idcurso" => \PDO::PARAM_INT,
             "data_inicio" => \PDO::PARAM_STR,
-            "data_termino" => \PDO::PARAM_STR
+            "data_termino" => \PDO::PARAM_STR,
+            "comandante" => \PDO::PARAM_INT,
         );
     }
 
@@ -97,7 +107,8 @@ class Companhia extends Product{
             "local" => $this->getLocal(),
             "idcurso" => $this->getIdCurso(),
             "data_inicio" => $this->getDataInicio(),
-            "data_termino" => $this->getDataTermino()
+            "data_termino" => $this->getDataTermino(),
+            "comandante" => $this->getComandante(),
         );
     }
 }

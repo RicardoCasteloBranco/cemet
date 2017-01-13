@@ -38,6 +38,7 @@ class CursoTabela implements ITabela{
     }
 
     public static function update($classeAnt, $classePos) {
-        
+        $tr = self::getInstancia();
+        $tr->update($classeAnt, $classePos);
     }
 }

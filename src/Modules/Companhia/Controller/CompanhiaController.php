@@ -9,6 +9,7 @@ use CasteloBranco\Cemet\Interfaces\IController;
 class CompanhiaController implements IController{
     public function addAction() {
         $cursos = \CasteloBranco\Cemet\Modules\Curso\Model\CursoTabela::findAll();
+        $pessoas = \CasteloBranco\Cemet\Modules\Pessoa\Model\PessoaTabela::findAll();
         if(filter_input(INPUT_SERVER, "REQUEST_METHOD") == "POST"){
             $dados = filter_input_array(INPUT_POST);
             $classe = \CasteloBranco\Cemet\Factory\Creator::
@@ -18,7 +19,7 @@ class CompanhiaController implements IController{
             header("location:?module=Companhia&page=show.php&idcurso=".$classe->getIdCurso());
         }
         return array(
-            "cursos" => $cursos
+            "cursos" => $cursos, "pessoas" => $pessoas
         );
     }
 
@@ -30,7 +31,7 @@ class CompanhiaController implements IController{
         $companhia = \CasteloBranco\Cemet\Modules\Companhia\Model\CompanhiaTabela::
                 find(["idcompanhia" => filter_input(INPUT_GET, "idcompanhia")]);
         $cursos = \CasteloBranco\Cemet\Modules\Curso\Model\CursoTabela::findAll();
-        
+        $pessoas = \CasteloBranco\Cemet\Modules\Pessoa\Model\PessoaTabela::findAll();
         if(filter_input(INPUT_SERVER, "REQUEST_METHOD") == "POST"){
             $dados = filter_input_array(INPUT_POST);
             $classe = \CasteloBranco\Cemet\Factory\Creator::
@@ -41,7 +42,8 @@ class CompanhiaController implements IController{
         }
         return array(
             "companhia" => $companhia,
-            "cursos" => $cursos
+            "cursos" => $cursos,
+            "pessoas" => $pessoas
         );
     }
 
@@ -53,7 +55,7 @@ class CompanhiaController implements IController{
                 findAll();
         return array(
             "companhias" => $companhias,
-            "curso" => $curso
+            "curso" => $curso,
         );
     }
    

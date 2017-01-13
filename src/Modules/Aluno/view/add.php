@@ -2,6 +2,23 @@
 $ger = new CasteloBranco\Cemet\Modules\Aluno\Controller\AlunoController();
 $dados = $ger->addAction();
 ?>
+<script type="text/javascript">
+    function populate(s1,s2){
+        var s1 = document.getElementById(s1);
+        var s2 = document.getElementById(s2);
+        s2.innerHTML = "";
+        <?php $estado = 0;   foreach ($dados["cidades"] as $cid): ?>
+            <?php if($cid->estado != $estado): ?>
+                if(s1.value == <?php echo $cid->estado; $estado = $cid->estado; ?>){
+                    var optionArray = [
+            <?php endif; ?>
+                    "<?php echo $cid->idcidade."|".$cid->nome;?>",
+            <?php if($cid->estado != $estado): ?>
+                ];
+            <?php endif; ?>
+        <?php    endforeach; ?>
+    }
+</script>
 <h2>Cadastro de Alunos</h2>
 <form method="post" action="">
     <fieldset>
@@ -21,9 +38,18 @@ $dados = $ger->addAction();
         </div>
         <div>
             <label for="genero">Gênero</label>
-            <select form="genero">
+            <select name="genero">
                 <?php foreach($dados["genero"] as $opt):?>
                 <option value="<?php echo $opt->idgenero ?>"><?php echo $opt->genero ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <div>
+            <label for="religiao">Religiao</label>
+            <select name="religiao">
+                <option></option>
+                <?php foreach($dados["religiao"] as $opt):?>
+                <option value="<?php echo $opt->idreligiao ?>"><?php echo $opt->religiao ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
@@ -113,7 +139,7 @@ $dados = $ger->addAction();
         </div>
         <div>
             <label for="uf">UF:</label>
-            <select name="uf">
+            <select name="uf" id="slct1" onchange="populate(this.id,'slct2')">
                 <option></option>
                 <?php foreach($dados["estados"] as $opt):?>
                 <option value="<?php echo $opt->idestado ?>"><?php echo $opt->uf ?></option>
@@ -122,7 +148,7 @@ $dados = $ger->addAction();
         </div>
         <div>
             <label for="cidade">Cidade</label>
-            <select name="cidade">
+            <select name="cidade" id="slct2">
                 <option></option>
                 <?php foreach($dados["cidades"] as $opt):?>
                 <option value="<?php echo $opt->idcidade ?>"><?php echo $opt->nome ?></option>
@@ -165,24 +191,36 @@ $dados = $ger->addAction();
             <label for="camisa">Camisa</label>
             <select name="camisa">
                 <option></option>
+                <?php for($i = 1; $i<= 5; $i++): ?>
+                <option><?php echo $i; ?></option>
+                <?php endfor; ?>
             </select>
         </div>
         <div>
             <label for="calca">Calça</label>
             <select name="calca">
                 <option></option>
+                <?php for($i = 34; $i<= 60; $i++): ?>
+                <option><?php echo $i; ?></option>
+                <?php endfor; ?>
             </select>
         </div>
         <div>
             <label for="calcado">Calçado</label>
             <select name="calcado">
                 <option></option>
+                <?php for($i = 35; $i<= 50; $i++): ?>
+                <option><?php echo $i; ?></option>
+                <?php endfor; ?>
             </select>
         </div>
         <div>
             <label for="cobertura">Cabeça</label>
             <select name="cobertura">
                 <option></option>
+                <?php for($i = 52; $i<= 63; $i++): ?>
+                <option><?php echo $i; ?></option>
+                <?php endfor; ?>
             </select>
         </div>
     </fieldset>

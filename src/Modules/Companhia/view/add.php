@@ -32,6 +32,15 @@ $dados = $ger->addAction();
         <input type="date" name="data_inicio">
     </div>
     <div>
+        <label for="comandante">Comandante</label>
+        <select name="comandante">
+            <option></option>
+            <?php foreach ($dados["pessoas"] as $opt): ?>
+            <option value="<?php echo $opt->idpessoa ?>"><?php $cpf = str_split($opt->cpf,3); echo $cpf[0].".".$cpf[1].".".$cpf[2]."-".$cpf[3]." - ".$opt->nome; ?></option>
+            <?php endforeach; ?>
+        </select>
+    </div>
+    <div>
         <input type="submit" name="btn_confirma" value="Adiciona">
     </div>
 </form>

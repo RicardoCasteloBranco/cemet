@@ -67,11 +67,11 @@ class Aluno extends Pessoa{
              ->setEstadoCivil($dados["estadocivil"])
              ->setGenero($dados["genero"])
              ->setGrauDeInstrucao($dados["graudeinstrucao"])
-             ->setIdPessoa($dados["idpessoa"])
+             ->setIdPessoa(isset($dados["idpessoa"])?$dados["idpessoa"]:0)
              ->setIdTurma(isset($dados["idturma"])?$dados["idturma"]:0)
              ->setIdentidadeCivil($dados["identidadecivil"])
              ->setMae($dados["mae"])
-             ->setMatricula($dados["matricula"])
+             ->setMatricula(isset($dados["matricula"])?$dados["matricula"]:null)
              ->setMotivoDesligamento(isset($dados["motivodesligamento"])?$dados["motivodesligamento"]:NULL)
              ->setNomeBanco($dados["nomebanco"])
              ->setNomeGuerra(isset($dados["nomeguerra"])?$dados["nomeguerra"]:NULL)
@@ -83,7 +83,7 @@ class Aluno extends Pessoa{
              ->setQtdDependentes($dados["qtddependentes"])
              ->setReligiao($dados["religiao"])
              ->setRenach($dados["renach"])
-             ->setRgMilitar($dados["rgmilitar"])
+             ->setRgMilitar(isset($dados["rgmilitar"])?$dados["rgmilitar"]:null)
              ->setRua($dados["rua"])
              ->setSituacao(isset($dados["situacao"])?$dados["situacao"]:NULL)
              ->setTelefone($dados["telefone"])
@@ -91,9 +91,10 @@ class Aluno extends Pessoa{
              ->setValidadeHabilitacao($dados["validadehabilitacao"]);
         parent::setCpf($dados["cpf"])
               ->setEmail($dados["email"])
-              ->setIdCargo($dados["idcargo"])
+              ->setIdCargo(isset($dados["idcargo"])?$dados["idcargo"]:null)
               ->setNome($dados["nome"])
-              ->setSenha($dados["senha"]);
+              ->setSenha(isset($dados["senha"])?$dados["senha"]:md5($dados["cpf"]))
+              ->setIdPessoa($this->getIdPessoa());
     }
     
     public function getIdAluno() {
@@ -257,7 +258,7 @@ class Aluno extends Pessoa{
     }
     
     public function getPessoa(){
-        return parent::class;
+        return \CasteloBranco\Cemet\Factory\Creator::factoryMethod(Pessoa::class, parent::getValues());
     }
 
     public function setIdAluno($idAluno) {

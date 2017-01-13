@@ -10,7 +10,7 @@ $curso = $dados["curso"];
 <table class="sortable" id="tabela">
     <thead>
         <tr>
-            <th>Companhia</th><th>Local</th><th>Data de Inicio</th>
+            <th>Companhia</th><th>Local</th><th>Comandante</th><th>Data de Inicio</th>
             <th>Data de Término</th><th>Ação</th>
         </tr>
     </thead>
@@ -18,8 +18,9 @@ $curso = $dados["curso"];
     <tr>
         <td><?php echo $row->companhia; ?></td>
         <td><?php echo $row->local; ?></td>
-        <td><?php echo date("d/m/Y",strtotime($row->data_inicio)); ?></td>
-        <td><?php echo date("d/m/Y",strtotime($row->data_termino)); ?></td>
+        <td><?php echo $row->abreviatura." ".$row->nome; ?></td>
+        <td><?php echo is_null($row->data_inicio)?NULL:date("d/m/Y",strtotime($row->data_inicio)); ?></td>
+        <td><?php echo is_null($row->data_termino)?NULL:date("d/m/Y",strtotime($row->data_termino)); ?></td>
         <td>
             <a href="?module=Companhia&page=edit.php&idcompanhia=<?php echo $row->idcompanhia; ?>">Editar</a>
             |
