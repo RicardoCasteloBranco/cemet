@@ -1,16 +1,20 @@
 <?php
-$ger = new CasteloBranco\Cemet\Modules\Aluno\Controller\AlunoController();
-$dados = $ger->addAction();
+$ger = new \CasteloBranco\Cemet\Modules\Aluno\Controller\AlunoController();
+$dados = $ger->editAction();
+$aluno = $dados["aluno"];
+$pessoa = $aluno->getPessoa();
 ?>
 <script src='../../../public/jscript/estado_cidade.js' type='text/javascript'></script>
 <h2>Cadastro de Alunos</h2>
 <form method="post" action="">
+    <input type="hidden" name="idaluno" value="<?php echo $aluno->getIdAluno(); ?>">
+    <input type="hidden" name="idpessoa" value="<?php echo $pessoa->getIdPessoa();?>">
     <fieldset>
         <legend>Dados Pessoais</legend>
         <hr>
         <div>
             <label for="nome">Nome</label>
-            <input type="text" name="nome">
+            <input type="text" name="nome" value="<?php echo $pessoa->getNome(); ?>">
         </div>
         <div>
             <label for="estadocivil">Estado civil:</label>
@@ -39,29 +43,29 @@ $dados = $ger->addAction();
         </div>
         <div>
             <label for="qtddependentes">Qtd de Dependentes</label>
-            <input type="text" name="qtddependentes">
+            <input type="text" name="qtddependentes" value="<?php echo $aluno->getQtdDependentes(); ?>">
         </div>
     </fieldset>
     <fieldset>
         <legend>Filiação</legend>
         <div>
             <label for="pai">Nome do Pai:</label>
-            <input type="text" name="pai">
+            <input type="text" name="pai" value="<?php echo $aluno->getPai(); ?>">
         </div>
         <div>
             <label for="mae">Nome da mãe</label>
-            <input type="text" name="mae">
+            <input type="text" name="mae" value="<?php echo $aluno->getMae(); ?>">
         </div>
     </fieldset>
     <fieldset>
         <legend>Documentos Pessoais</legend>
         <div>
             <label for="identidadecivil">RG Civil</label>
-            <input type="text" name="identidadecivil">
+            <input type="text" name="identidadecivil" value="<?php echo $aluno->getIdentidadeCivil(); ?>">
         </div>
         <div>
             <label for="orgaoexpedidoridcivil">Orgão Expedidor/UF:</label>
-            <input type="text" name="orgaoexpedidoridcivil">
+            <input type="text" name="orgaoexpedidoridcivil" value="<?php echo $aluno->getOrgaoExpedidorIdCivil(); ?>">
         </div>
         <div>
             <label for="cpf">CPF</label>

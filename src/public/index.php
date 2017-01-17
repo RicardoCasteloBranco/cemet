@@ -22,8 +22,8 @@ Principal to Application
                 <h2 id="titulo_cabecalho">Sistema de Gerenciamento de Cursos</h2>
             </div>
             <div id="login">
-                <h2>Login</h2>
                 <form method="post" action="" name="fm_login">
+                    <h2>Login</h2>
                     <fieldset>
                     <div>
                         <label for="cpf">CPF:</label>
@@ -33,8 +33,14 @@ Principal to Application
                         <label for="senha">Senha:</label>
                         <input type="password" name="senha">
                     </div>
+                    </fieldset>
+                    <fieldset>
                     <div>
                         <input type="submit" name="btn_confirma" value="Confirma">
+                    </div>
+                    <div>
+                        <input type="button" name="btn_cadastra" value="Cadastro" 
+                               onclick="location.href='../Modules/Application/view/bootstrap.php?module=Application&page=cadastro.php'">
                     </div>
                     </fieldset>
                 </form>

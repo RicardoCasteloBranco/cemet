@@ -2,7 +2,7 @@
 namespace CasteloBranco\Cemet\Modules\Aluno\Controller;
 use CasteloBranco\Cemet\Interfaces\IController;
 
-/**
+/**"
  * Description of AlunoController
  *
  * @author antonio
@@ -18,11 +18,10 @@ class AlunoController implements IController{
             $idPessoa = \CasteloBranco\Cemet\Modules\Pessoa\Model\PessoaTabela::
                     insert($pessoa);
             $classe->setIdPessoa($idPessoa);
-            \CasteloBranco\Cemet\Modules\Aluno\Model\AlunoTabela::insert($classe);
-            header();
+            $idAluno = \CasteloBranco\Cemet\Modules\Aluno\Model\AlunoTabela::insert($classe);
+            header("location:?module=Fotografia&page=add.php&idaluno=".$idAluno);
         }
         return array(
-            "cidades" => \CasteloBranco\Cemet\Modules\Aluno\Model\AlunoTabela::tabelaCidades(),
             "estados" => \CasteloBranco\Cemet\Modules\Aluno\Model\AlunoTabela::tabelaEstados(),
             "estado_civil" => \CasteloBranco\Cemet\Modules\Aluno\Model\AlunoTabela::tabelaEstadoCivil(),
             "genero" => \CasteloBranco\Cemet\Modules\Aluno\Model\AlunoTabela::tabelaGeneros(),

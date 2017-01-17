@@ -8,7 +8,6 @@ use CasteloBranco\Cemet\Modules\Pessoa\Model\Pessoa;
  */
 class Aluno extends Pessoa{
     private $idAluno;
-    private $idPessoa;
     private $idTurma;
     private $dataPraca;
     private $dataNasc;
@@ -49,6 +48,7 @@ class Aluno extends Pessoa{
     private $motivoDesligamento;
     
     public function __construct(array $dados) {
+        var_dump($dados);
         $this->setIdAluno(isset($dados["idaluno"])?$dados["idaluno"]:0)
              ->setAgencia($dados["agencia"])
              ->setBairro($dados["bairro"])
@@ -56,27 +56,26 @@ class Aluno extends Pessoa{
              ->setCalcado($dados["calcado"])
              ->setCamisa($dados["camisa"])
              ->setCategoria($dados["categoria"])
-             ->setCelular($dados["celular"])
+             ->setCelular(strlen($dados["celular"])>0?$dados["celular"]:NULL)
              ->setCidade($dados["cidade"])
              ->setCobertura($dados["cobertura"])
              ->setContaCorrente($dados["contacorrente"])
-             ->setCursoFormacao($dados["curso_formacao"])
+             ->setCursoFormacao(strlen($dados["curso_formacao"])>0?$dados["curso_formacao"]:NULL)
              ->setDataNasc($dados["datanasc"])
-             ->setDataPraca($dados["datapraca"])
+             ->setDataPraca(strlen($dados["datapraca"])>0?$dados["datapraca"]:NULL)
              ->setDesligamento(isset($dados["desligamento"])?$dados["desligamento"]:NULL)
              ->setEstadoCivil($dados["estadocivil"])
              ->setGenero($dados["genero"])
              ->setGrauDeInstrucao($dados["graudeinstrucao"])
-             ->setIdPessoa(isset($dados["idpessoa"])?$dados["idpessoa"]:0)
-             ->setIdTurma(isset($dados["idturma"])?$dados["idturma"]:0)
+             ->setIdTurma(isset($dados["idturma"])?$dados["idturma"]:NULL)
              ->setIdentidadeCivil($dados["identidadecivil"])
              ->setMae($dados["mae"])
              ->setMatricula(isset($dados["matricula"])?$dados["matricula"]:null)
              ->setMotivoDesligamento(isset($dados["motivodesligamento"])?$dados["motivodesligamento"]:NULL)
              ->setNomeBanco($dados["nomebanco"])
              ->setNomeGuerra(isset($dados["nomeguerra"])?$dados["nomeguerra"]:NULL)
-             ->setNumEfisco(isset($dados["numefisco"])?$dados["numefisco"]:0)
-             ->setNumeroAluno(isset($dados["numeroaluno"])?$dados["numeroaluno"]:0)
+             ->setNumEfisco(isset($dados["numefisco"])?$dados["numefisco"]:NULL)
+             ->setNumeroAluno(isset($dados["numeroaluno"])?$dados["numeroaluno"]:NULL)
              ->setOrgaoExpedidorIdCivil($dados["orgaoexpedidoridcivil"])
              ->setPai($dados["pai"])
              ->setPontoReferencia($dados["pontoreferencia"])
@@ -86,27 +85,27 @@ class Aluno extends Pessoa{
              ->setRgMilitar(isset($dados["rgmilitar"])?$dados["rgmilitar"]:null)
              ->setRua($dados["rua"])
              ->setSituacao(isset($dados["situacao"])?$dados["situacao"]:NULL)
-             ->setTelefone($dados["telefone"])
-             ->setTelefoneContato($dados["telefonecontato"])
+             ->setTelefone(strlen($dados["telefone"])>0?$dados["telefone"]:NULL)
+             ->setTelefoneContato(strlen($dados["telefonecontato"])>0?$dados["telefonecontato"]:NULL)
              ->setValidadeHabilitacao($dados["validadehabilitacao"]);
-        parent::setCpf($dados["cpf"])
-              ->setEmail($dados["email"])
-              ->setIdCargo(isset($dados["idcargo"])?$dados["idcargo"]:null)
-              ->setNome($dados["nome"])
-              ->setSenha(isset($dados["senha"])?$dados["senha"]:md5($dados["cpf"]))
-              ->setIdPessoa($this->getIdPessoa());
+             parent::setCpf($dados["cpf"])
+             ->setEmail($dados["email"])
+             ->setIdCargo(isset($dados["idcargo"])?$dados["idcargo"]:null)
+             ->setNome($dados["nome"])
+             ->setSenha(isset($dados["senha"])?$dados["senha"]:md5($dados["cpf"]))
+             ->setIdPessoa(isset($dados["idpessoa"])?$dados["idpessoa"]:0);
     }
     
     public function getIdAluno() {
         return $this->idAluno;
     }
 
-    public function getIdPessoa() {
-        return $this->idPessoa;
-    }
-
     public function getIdTurma() {
         return $this->idTurma;
+    }
+    
+    public function getIdPessoa() {
+        parent::getIdPessoa();
     }
 
     public function getDataPraca() {
@@ -266,13 +265,13 @@ class Aluno extends Pessoa{
         return $this;
     }
 
-    public function setIdPessoa($idPessoa) {
-        $this->idPessoa = $idPessoa;
-        return $this;
-    }
-
     public function setIdTurma($idTurma) {
         $this->idTurma = $idTurma;
+        return $this;
+    }
+    
+    public function setIdPessoa($idPessoa) {
+        parent::setIdPessoa($idPessoa);
         return $this;
     }
 
@@ -471,7 +470,7 @@ class Aluno extends Pessoa{
             "nomebanco" => \PDO::PARAM_STR,
             "agencia" => \PDO::PARAM_STR,
             "contacorrente" => \PDO::PARAM_STR,
-            "numefisco" => \PDO::PARAM_INT,
+            "numefisco" => \PDO::PARAM_STR,
             "rua" => \PDO::PARAM_STR,
             "bairro" => \PDO::PARAM_STR,
             "cidade" => \PDO::PARAM_INT,
@@ -508,7 +507,7 @@ class Aluno extends Pessoa{
     public function getValues() {
         return array(
             "idaluno" => $this->getIdAluno(),
-            "idpessoa" => $this->getIdPessoa(),
+            "idpessoa" => parent::getIdPessoa(),
             "idturma" => $this->getIdTurma(),
             "datapraca" => $this->getDataPraca(),
             "datanasc" => $this->getDataNasc(),

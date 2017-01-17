@@ -23,7 +23,7 @@ Principal to Application
                 <h2 id="titulo_cabecalho">Sistema de Gerenciamento de Cursos</h2>
             </div>
         </header>            
-            <div id="bem_vindo">Seja bem vindo: <?php echo $pessoa->getNome(); ?></div>
+            <div id="bem_vindo"><b>Seja bem vindo: </b><?php echo $pessoa->getNome(); ?></div>
         <iframe name="principal" src="bootstrap.php?module=<?php echo filter_input(INPUT_GET, "module"); ?>&page=<?php echo filter_input(INPUT_GET,"page"); ?>"></iframe>
          <div class="menu">
              <ul id="menu">

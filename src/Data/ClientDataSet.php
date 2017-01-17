@@ -33,7 +33,7 @@ class ClientDataSet {
         $ds->setParams($classe->getParams());
         $ds->setCols(array_keys($classe->getValues()));
         $ds->setVals($classe->getValues());
-        return (int)$ds->execute();
+        return $ds->execute();
     }
     
     public function doUpdate($classeAnt,$classePos){

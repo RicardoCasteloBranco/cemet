@@ -13,6 +13,7 @@ and open the template in the editor.
         <script src="../../../public/jscript/sorttable.js" type="text/javascript"></script>
         <script src="../../../public/jscript/paging.js" type="text/javascript"></script>
         <script src="../../../public/jscript/mascara.js" type="text/javascript"></script>
+        <script src='../../../public/jscript/jquery-3.1.1.min.js' type='text/javascript'></script>
     </head>
     <body>
         <?php

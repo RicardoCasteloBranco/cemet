@@ -55,5 +55,16 @@ class DisciplinaController implements IController{
             "curso" => $curso
         );
     }
-
+    
+    public function printAction(){
+        $disciplina = \CasteloBranco\Cemet\Modules\Disciplina\Model\DisciplinaTabela::
+                find(["iddisciplina" => filter_input(INPUT_GET, "iddisciplina")]);
+        $curso = \CasteloBranco\Cemet\Modules\Curso\Model\CursoTabela::
+                find(["idcurso" => $disciplina->getIdCurso()]);
+        define("IDDISCIPLINA", $disciplina->getIdDisciplina());
+        $aulas = \CasteloBranco\Cemet\Modules\Aula\Model\AulaTabela::findAll();
+        return array(
+            "disciplina" => $disciplina, "curso" => $curso, "aulas" => $aulas
+        );
+    }
 }

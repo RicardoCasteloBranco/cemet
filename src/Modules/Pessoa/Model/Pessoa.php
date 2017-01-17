@@ -111,4 +111,10 @@ class Pessoa extends Product{
             "email" => $this->getEmail()
         );
     }
+    
+    public function __toString() {
+        $cargo = \CasteloBranco\Cemet\Modules\Cargo\Model\CargoTabela::
+                find(["idcargo" => $this->idCargo]);
+        return $cargo->getAbreviatura()." ".$this->getNome();
+    }
 }

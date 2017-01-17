@@ -18,14 +18,41 @@ class AlunoTabela implements ITabela{
     }
 
     public static function find($id) {
+        $cols = ["aluno.idaluno","aluno.idpessoa","aluno.idturma","aluno.datapraca",
+            "aluno.datanasc","aluno.nomebanco","aluno.agencia","aluno.contacorrente",
+            "aluno.numefisco","aluno.rua","aluno.bairro","aluno.cidade","aluno.estadocivil",
+            "aluno.pai","aluno.mae","aluno.religiao","aluno.genero","aluno.identidadecivil",
+            "aluno.orgaoexpedidoridcivil","aluno.categoria","aluno.renach","aluno.validadehabilitacao",
+            "aluno.rgmilitar","aluno.camisa","aluno.calca","aluno.calcado","aluno.cobertura",
+            "aluno.graudeinstrucao","aluno.curso_formacao","aluno.qtddependentes","aluno.celular",
+            "aluno.telefone","aluno.matricula","aluno.nomeguerra","aluno.telefonecontato",
+            "aluno.pontoreferencia","aluno.numeroaluno","aluno.situacao","aluno.desligamento",
+            "aluno.motivodesligamento","pessoa.nome","pessoa.cpf","pessoa.email"];
         $tr = self::getInstancia();
+        $table = $tr->getTable();
+        $table->setCols($cols);
+        $table->setJoin("INNER","pessoa","aluno","idpessoa","idpessoa");
+      
         $dados = $tr->find($id);
         return \CasteloBranco\Cemet\Factory\Creator::factoryMethod(Aluno::class, $dados);
     }
 
     public static function findAll() {
+        $cols = ["aluno.idaluno","pessoa.nome as nome_completo","aluno.nomeguerra",
+            "aluno.matricula","aluno.rua","cidades.nome as cidade","aluno.bairro",
+            "estados.uf as estado","pessoa.email","CONCAT_WS(',',telefone,celular,telefonecontato)",
+            "turma.turma","curso.siglacurso","aluno.desligamento","aluno.motivodesligamento",
+            "aluno.situacao","aluno.numeroaluno"];
         $tr = self::getInstancia();
         $table = $tr->getTable();
+        $table->setCols($cols);
+        $table->setJoin("INNER","pessoa","aluno","idpessoa","idpessoa");
+        $table->setJoin("INNER","cidades","aluno","idcidade","cidade");
+        $table->setJoin("INNER","estados","cidades","idestado","estado");
+        $table->setJoin("INNER","estado_civil","aluno","idestadocivil","estadocivil");
+        $table->setJoin("LEFT","turma","aluno","idturma","idturma");
+        $table->setJoin("LEFT","companhia","turma","idcompanhia","companhia");
+        $table->setJoin("LEFT","curso","companhia","idcurso","idcurso");
         $tr->setTable($table);
         return $tr->findAll();
     }

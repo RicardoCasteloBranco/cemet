@@ -19,7 +19,10 @@ $dados = $ger->indexAction();
             <td><?php echo $row->bibliografia; ?></td>
             <td><?php echo $row->siglacurso; ?></td>
             <td><?php echo $row->turma; ?></td>
-            <td><a href="?module=PlanoAula&page=show.php&idinstrutor=<?php echo $row->idinstrutor; ?>">Planos de Aula</a></td>
+            <td><a href="?module=PlanoAula&page=show.php&idinstrutor=<?php echo $row->idinstrutor; ?>">Planos de Aula</a>
+                |
+                <a href="../../Disciplina/view/print.php?iddisciplina=<?php echo $row->iddisciplina; ?>">PlaDis</a>
+            </td>
         </tr>
         <?php endforeach; ?>
     </tbody>

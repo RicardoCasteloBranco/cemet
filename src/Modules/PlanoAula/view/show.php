@@ -35,7 +35,7 @@ $instrutor = $dados["instrutor"];
             <td>
                 <a href="?module=PlanoAula&page=edit.php&idplano=<?php echo $row->idplano;?>">Editar</a>
                 |
-                <a href="?module-PlanoAula&page=print.php&idplano=<?php echo $row->idplano;?>">Imprimir</a>
+                <a href="../../PlanoAula/view/print.php?idplano=<?php echo $row->idplano;?>">Imprimir</a>
             </td>
         </tr>
         <?php endforeach; ?>
