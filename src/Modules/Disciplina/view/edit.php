@@ -20,8 +20,25 @@ $disc = $dados["disciplina"];
         <input type="text" name="cargahoraria" value="<?php echo $disc->getCargaHoraria(); ?>">
     </div>
     <div>
+        <label for="regime">Regime</label>
+        <input type="radio" name="regime" value="Presencial"
+               <?php if($disc->getRegime() == "Presencial"): ?>
+               checked="true"
+               <?php endif; ?>
+               >Presencial
+        <input type="radio" name="regime" value="À distância"
+               <?php if($disc->getRegime() == "À distância"): ?>
+               checked="true"
+               <?php endif; ?>
+               >À distância
+    </div>
+    <div>
         <label for="ementa">Ementa</label>
         <textarea name="ementa"><?php echo $disc->getEmenta(); ?></textarea>
+    </div>
+    <div>
+        <label for="objetivogeral">Objetivo Geral</label>
+        <textarea name="objetivogeral"><?php echo $disc->getObjetivoGeral(); ?></textarea>
     </div>
     <div>
         <label for="conhecimento">Conhecimento</label>

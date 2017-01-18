@@ -13,13 +13,17 @@ $dados = $ger->addAction();
         <input type="text" name="siglacurso">
     </div>
     <div>
-        <label for="idorgao">Orgão</label>
-        <select name="idorgao">
+        <label for="idcampus">Campus</label>
+        <select name="idcampus">
             <option></option>
-            <?php foreach($dados["orgaos"] as $op): ?>
-            <option value="<?php echo $op->idorgao;?>"><?php echo $op->sigla; ?></option>
+            <?php foreach($dados["campus"] as $op): ?>
+            <option value="<?php echo $op->idcampus;?>"><?php echo $op->sigla_campus; ?></option>
             <?php endforeach; ?>
         </select>
+    </div>
+    <div>
+        <label for="publicoalvo">Público Alvo</label>
+        <input type="text" name="publicoalvo">
     </div>
     <div>
         <input type="submit" name="btn_confirma" value="Adiciona">

@@ -6,6 +6,7 @@ $ger = new \CasteloBranco\Cemet\Modules\Disciplina\Controller\DisciplinaControll
 $dados = $ger->printAction();
 $disciplina = $dados["disciplina"];
 $curso = $dados["curso"];
+$campus = $dados["campus"];
 
 $pdf = new PDF_MC_Table("L", "pt", "A4");
 $pdf->AliasNbPages();
@@ -28,9 +29,11 @@ $pdf->SetFont('Arial', 'B', 12);
 $pdf->Cell(0, 16, utf8_decode('I - DADOS DE IDENTIFICAÇÃO'), 1, 1, 'L');
 $pdf->SetFont('');
 $pdf->Cell(385, 14, utf8_decode("Disciplina: " . $disciplina->getDisciplina()), 1, 0, 'L');
-$pdf->Cell(400, 14, utf8_decode("Campus: Campus de Ensino Metropolitano - I"), 1, 1, 'L');
+$pdf->Cell(400, 14, utf8_decode("Campus: ".$campus->getNomeCampus()), 1, 1, 'L');
 $pdf->Cell(325, 14, utf8_decode("Carga Horária: " . $disciplina->getCargaHoraria() . " h/a"), 1, 0, "L");
 $pdf->Cell(460, 14, utf8_decode("Curso: " . $curso->getNomeCurso()), 1, 1, "L");
+$pdf->Cell(325, 14, utf8_decode("Regime: " . $disciplina->getRegime()), 1, 0, "L");
+$pdf->Cell(460, 14, utf8_decode("Público Alvo: " . $curso->getPublicoAlvo()), 1, 1, "L");
 $pdf->SetFont("Arial", "B", 12);
 $pdf->Cell(0, 16, utf8_decode("II - COMPETÊNCIAS CONSTRUÍDAS"), 1, 1, 'L');
 $pdf->Cell(262, 14, "Conhecimento", 1, 0, "C");
@@ -43,15 +46,19 @@ $pdf->SetWidths(array(262, 262, 261));
 $pdf->SetAligns(array("J", "J", "J"));
 $pdf->Row(array(utf8_decode($disciplina->getConhecimento()), utf8_decode($disciplina->getHabilidade()), utf8_decode($disciplina->getAtitude())));
 $pdf->SetFont("Arial", "B", 12);
-$pdf->Cell(0, 16, "III - EMENTA", 1, 1, "L");
+$pdf->Cell(0, 16, "III - OBJETIVOS GERAIS", 1, 1, "L");
+$pdf->SetFont("");
+$pdf->MultiCell(0, 14, utf8_decode($disciplina->getObjetivoGeral()), 1, "J");
+$pdf->SetFont("Arial", "B", 12);
+$pdf->Cell(0, 16, "IV - EMENTA", 1, 1, "L");
 $pdf->SetFont("");
 $pdf->MultiCell(0, 14, utf8_decode($disciplina->getEmenta()), 1, "J");
 $pdf->SetFont("Arial", "B", 12);
-$pdf->Cell(0, 16, "IV - UNIDADES DE APRENDIZAGEM", 1, 1, "L");
+$pdf->Cell(0, 16, "V - UNIDADES DE APRENDIZAGEM", 1, 1, "L");
 $pdf->Cell(30, 14, "H/A", 1, 0, "C");
 $pdf->Cell(150, 14, utf8_decode("Objetivos Especificos"), 1, 0, "C");
 $pdf->Cell(160, 14, utf8_decode("Conteúdos Programáticos"), 1, 0, "C");
-$pdf->Cell(175, 14, utf8_decode("Orientações Pedagógicas"), 1, 0, "C");
+$pdf->Cell(175, 14, utf8_decode("Transdisciplinaridade"), 1, 0, "C");
 $pdf->Cell(120, 14, utf8_decode("Instrutor Secundário"), 1, 0, "C");
 $pdf->Cell(150, 14, utf8_decode("Eixos Temáticos"), 1, 1, "C");
 $pdf->SetFont("Arial", "", 11);
@@ -65,11 +72,11 @@ foreach ($dados["aulas"] as $aulas) {
         $secundario = utf8_decode("Não");
     }
     $pdf->Row(array($aulas->qtd_aulas, utf8_decode($aulas->objetivo), utf8_decode($aulas->conteudo), utf8_decode($aulas->relacao), $secundario, utf8_decode($aulas->eixo)));
-}
+}  
 $posY = $pdf->GetY();
 $pdf->SetXY(28.5, $posY);
-$pdf->SetFont("Arial", "B", 14);
-$pdf->Cell(0, 14, "V - BIBLIOGRAFIA", 1, 1, "L");
+$pdf->SetFont("Arial", "B", 12);
+$pdf->Cell(0, 14, utf8_decode("VI - REFERÊNCIA"), 1, 1, "L");
 $pdf->SetFont("");
 $pdf->MultiCell(0, 14, utf8_decode($disciplina->getBibliografia()), 1, "J");
 $nomeArquivo = "Plano de Disciplina " . utf8_decode($disciplina->getDisciplina()) . " " . $curso->getSiglaCurso() . ".pdf";

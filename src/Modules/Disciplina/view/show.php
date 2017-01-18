@@ -8,8 +8,8 @@ $curso = $dados["curso"];
 <table class="sortable">
     <thead>
         <tr>
-            <th rowspan="2">Disciplina</th><th rowspan="2">Sigla</th><th rowspan="2">CH</th>
-            <th rowspan="2">Ementa</th><th colspan="3">Competências</th><th rowspan="2">Bibliografia</th>
+            <th rowspan="2">Disciplina</th><th rowspan="2">Sigla</th><th rowspan="2">CH</th><th rowspan="2">Regime</th>
+            <th rowspan="2">Ementa</th><th rowspan="2">Objetivo Geral</th><th colspan="3">Competências</th><th rowspan="2">Bibliografia</th>
             <th rowspan="2">Ação</th>
         </tr>
         <tr>
@@ -22,7 +22,9 @@ $curso = $dados["curso"];
             <td><?php echo $row->disciplina; ?></td>
             <td><?php echo $row->sigla; ?></td>
             <td><?php echo $row->cargahoraria; ?></td>
+            <td><?php echo $row->regime; ?></td>
             <td><?php echo $row->ementa; ?></td>
+            <td><?php echo $row->objetivogeral; ?></td>
             <td><?php echo $row->conhecimento; ?></td>
             <td><?php echo $row->habilidade; ?></td>
             <td><?php echo $row->atitude; ?></td>

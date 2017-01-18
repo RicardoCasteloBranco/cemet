@@ -28,7 +28,7 @@ $disc = $dados["disciplina"];
         <textarea name="eixo"></textarea>
     </div>
     <div>
-        <label for="relacao">Relação</label>
+        <label for="relacao">Relação Transdiciplinar</label>
         <textarea name="relacao"></textarea>
     </div>
     <div>

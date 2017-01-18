@@ -34,6 +34,9 @@ class ApplicationController {
     }
     
     public function loginAction(){
+        if(!$this->verificaBrowser()){
+            header("location:../Modules/Application/view/bootstrap.php?module=Application&page=navegador.php");
+        }
         if(filter_input(INPUT_SERVER, "REQUEST_METHOD") == "POST"){
             $cpf = str_replace([".","-"],"",filter_input(INPUT_POST, "cpf"));
             $pessoa = ApplicationTabela::getUsuario($cpf);

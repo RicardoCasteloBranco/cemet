@@ -30,7 +30,7 @@ $aula = $dados["aula"];
         <textarea name="eixo"><?php echo $aula->getEixo(); ?></textarea>
     </div>
     <div>
-        <label for="relacao">Relação</label>
+        <label for="relacao">Relação Transdisciplinar</label>
         <textarea name="relacao"><?php echo $aula->getRelacao(); ?></textarea>
     </div>
     <div>

@@ -20,7 +20,7 @@ $curso = $dados["curso"];
         <td><?php echo $row->local; ?></td>
         <td><?php echo $row->abreviatura." ".$row->nome; ?></td>
         <td><?php echo date("d/m/Y",strtotime($row->data_inicio)); ?></td>
-        <td><?php echo date("d/m/Y",strtotime($row->data_termino)); ?></td>
+        <td><?php echo is_null($row->data_termino)?NULL:date("d/m/Y",strtotime($row->data_termino)); ?></td>
         <td>
             <a href="?module=Instrutor&page=show_turma.php&idcompanhia=<?php echo $row->idcompanhia; ?>">Turmas</a>
         </td>

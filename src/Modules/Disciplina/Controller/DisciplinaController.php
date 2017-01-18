@@ -61,10 +61,13 @@ class DisciplinaController implements IController{
                 find(["iddisciplina" => filter_input(INPUT_GET, "iddisciplina")]);
         $curso = \CasteloBranco\Cemet\Modules\Curso\Model\CursoTabela::
                 find(["idcurso" => $disciplina->getIdCurso()]);
+        $campus = \CasteloBranco\Cemet\Modules\Campus\Model\CampusTabela::
+                find(["idcampus" => $curso->getIdCampus()]);
         define("IDDISCIPLINA", $disciplina->getIdDisciplina());
         $aulas = \CasteloBranco\Cemet\Modules\Aula\Model\AulaTabela::findAll();
         return array(
-            "disciplina" => $disciplina, "curso" => $curso, "aulas" => $aulas
+            "disciplina" => $disciplina, "curso" => $curso, "aulas" => $aulas,
+            "campus" => $campus
         );
     }
 }

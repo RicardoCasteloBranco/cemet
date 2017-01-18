@@ -12,6 +12,8 @@ class Disciplina extends Product{
     private $disciplina;
     private $sigla;
     private $cargaHoraria;
+    private $regime;
+    private $objetivoGeral;
     private $ementa;
     private $conhecimento;
     private $habilidade;
@@ -28,7 +30,9 @@ class Disciplina extends Product{
              ->setEmenta($dados["ementa"])
              ->setHabilidade($dados["habilidade"])
              ->setIdCurso($dados["idcurso"])
-             ->setSigla($dados["sigla"]);
+             ->setSigla($dados["sigla"])
+             ->setObjetivoGeral($dados["objetivogeral"])
+             ->setRegime($dados["regime"]);
     }
     
     public function getIdDisciplina() {
@@ -50,7 +54,17 @@ class Disciplina extends Product{
     public function getCargaHoraria() {
         return $this->cargaHoraria;
     }
+    
+    public function getRegime() {
+        return $this->regime;
+    }
 
+        
+    public function getObjetivoGeral() {
+        return $this->objetivoGeral;
+    }
+
+    
     public function getEmenta() {
         return $this->ementa;
     }
@@ -95,7 +109,19 @@ class Disciplina extends Product{
         $this->cargaHoraria = $cargaHoraria;
         return $this;
     }
+    
+    public function setRegime($regime) {
+        $this->regime = $regime;
+        return $this;
+    }
 
+        
+    public function setObjetivoGeral($objetivoGeral) {
+        $this->objetivoGeral = $objetivoGeral;
+        return $this;
+    }
+
+    
     public function setEmenta($ementa) {
         $this->ementa = $ementa;
         return $this;
@@ -132,7 +158,9 @@ class Disciplina extends Product{
             "conhecimento" => \PDO::PARAM_STR,
             "habilidade" => \PDO::PARAM_STR,
             "atitude" => \PDO::PARAM_STR,
-            "bibliografia" => \PDO::PARAM_STR
+            "bibliografia" => \PDO::PARAM_STR,
+            "objetivogeral" => \PDO::PARAM_STR,
+            "regime" => \PDO::PARAM_STR
         );
     }
 
@@ -147,7 +175,9 @@ class Disciplina extends Product{
             "conhecimento" => $this->getConhecimento(),
             "habilidade" => $this->getHabilidade(),
             "atitude" => $this->getAtitude(),
-            "bibliografia" => $this->getBibliografia()
+            "bibliografia" => $this->getBibliografia(),
+            "objetivogeral" => $this->getObjetivoGeral(),
+            "regime" => $this->getRegime()
         );
     }
 }

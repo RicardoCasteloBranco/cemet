@@ -1,14 +1,14 @@
 <?php
-namespace CasteloBranco\Cemet\Modules\Curso\Model;
+namespace CasteloBranco\Cemet\Modules\Campus\Model;
 use CasteloBranco\Cemet\Interfaces\ITabela;
 /**
- * Description of CursoTabela
+ * Description of CampusTabela
  *
- * @author ricardo
+ * @author antonio
  */
-class CursoTabela implements ITabela{
+class CampusTabela implements ITabela{
     public static function getInstancia() {
-        $tr = new \CasteloBranco\Cemet\Data\Transation("curso");
+        $tr = new \CasteloBranco\Cemet\Data\Transation("campus");
         return $tr;
     }
     
@@ -20,15 +20,13 @@ class CursoTabela implements ITabela{
     public static function find($id) {
         $tr = self::getInstancia();
         return \CasteloBranco\Cemet\Factory\Creator::
-                factoryMethod(Curso::class, $tr->find($id));
+                factoryMethod(Campus::class, $tr->find($id));
     }
 
     public static function findAll() {
         $tr = self::getInstancia();
         $table = $tr->getTable();
-        $table->setJoin("INNER","campus","curso","idcampus","idcampus");
         $table->setJoin("INNER","orgao","campus","idorgao","idorgao");
-        $table->setOrder("campus.idorgao");
         $tr->setTable($table);
         return $tr->findAll();
     }
@@ -42,4 +40,5 @@ class CursoTabela implements ITabela{
         $tr = self::getInstancia();
         $tr->update($classeAnt, $classePos);
     }
+
 }

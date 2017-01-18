@@ -33,8 +33,17 @@ $optGroup = 0;
         <input type="text" name="cargahoraria">
     </div>
     <div>
+        <label for="regime">Regime</label>
+        <input type="radio" name="regime" value="Presencial">Presencial
+        <input type="radio" name="regime" value="À distância">À distância
+    </div>
+    <div>
         <label for="ementa">Ementa</label>
         <textarea name="ementa"></textarea>
+    </div>
+    <div>
+        <label for="objetivogeral">Objetivo Geral</label>
+        <textarea name="objetivogeral"></textarea>
     </div>
     <div>
         <label for="conhecimento">Conhecimento</label>

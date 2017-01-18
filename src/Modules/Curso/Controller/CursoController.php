@@ -8,7 +8,7 @@ use CasteloBranco\Cemet\Interfaces\IController;
  */
 class CursoController implements IController{
     public function addAction() {
-        $orgaos = \CasteloBranco\Cemet\Modules\Orgao\Model\OrgaoTabela::findAll();
+        $campus = \CasteloBranco\Cemet\Modules\Campus\Model\CampusTabela::findAll();
         
         if(filter_input(INPUT_SERVER, "REQUEST_METHOD") == "POST"){
             $dados = filter_input_array(INPUT_POST);
@@ -19,7 +19,7 @@ class CursoController implements IController{
             header("location:?module=Curso&page=index.php");
         }
         return array(
-            "orgaos" => $orgaos
+            "campus" => $campus
         );
     }
 
@@ -30,7 +30,7 @@ class CursoController implements IController{
     public function editAction() {
         $curso = \CasteloBranco\Cemet\Modules\Curso\Model\CursoTabela::
                 find(["idcurso" => filter_input(INPUT_GET, "idcurso")]);
-        $orgaos = \CasteloBranco\Cemet\Modules\Orgao\Model\OrgaoTabela::findAll();
+        $campus = \CasteloBranco\Cemet\Modules\Campus\Model\CampusTabela::findAll();
         if(filter_input(INPUT_SERVER, "REQUEST_METHOD") == "POST"){
             $dados = filter_input_array(INPUT_POST);
             $classe = \CasteloBranco\Cemet\Factory\Creator::
@@ -41,7 +41,7 @@ class CursoController implements IController{
         }
         return array(
             "curso" => $curso,
-            "orgaos" => $orgaos
+            "campus" => $campus
         );
     }
 

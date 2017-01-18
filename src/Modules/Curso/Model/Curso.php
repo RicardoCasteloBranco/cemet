@@ -8,23 +8,25 @@ use CasteloBranco\Cemet\Factory\Product;
  */
 class Curso extends Product{
     private $idCurso;
-    private $idOrgao;
+    private $idCampus;
     private $siglaCurso;
     private $nomeCurso;
+    private $publicoAlvo;
     
     function __construct(array $dados) {
         $this->setIdCurso(isset($dados["idcurso"])?$dados["idcurso"]:0)
-             ->setIdOrgao($dados["idorgao"])
+             ->setIdCampus($dados["idcampus"])
              ->setNomeCurso($dados["nomecurso"])
-             ->setSiglaCurso($dados["siglacurso"]);
+             ->setSiglaCurso($dados["siglacurso"])
+             ->setPublicoAlvo($dados["publicoalvo"]);
     }
     
     public function getIdCurso() {
         return $this->idCurso;
     }
 
-    public function getIdOrgao() {
-        return $this->idOrgao;
+    public function getIdCampus() {
+        return $this->idCampus;
     }
 
     public function getSiglaCurso() {
@@ -34,14 +36,18 @@ class Curso extends Product{
     public function getNomeCurso() {
         return $this->nomeCurso;
     }
-
+    
+    public function getPublicoAlvo() {
+        return $this->publicoAlvo;
+    }
+    
     public function setIdCurso($idCurso) {
         $this->idCurso = $idCurso;
         return $this;
     }
 
-    public function setIdOrgao($idOrgao) {
-        $this->idOrgao = $idOrgao;
+    public function setIdCampus($idCampus) {
+        $this->idCampus = $idCampus;
         return $this;
     }
 
@@ -55,21 +61,28 @@ class Curso extends Product{
         return $this;
     }
     
+    public function setPublicoAlvo($publicoAlvo) {
+        $this->publicoAlvo = $publicoAlvo;
+        return $this;
+    }
+    
     public function getParams() {
         return array(
             "idcurso" => \PDO::PARAM_INT,
-            "idorgao" => \PDO::PARAM_INT,
+            "idcampus" => \PDO::PARAM_INT,
             "siglacurso" => \PDO::PARAM_STR,
-            "nomecurso" => \PDO::PARAM_STR
+            "nomecurso" => \PDO::PARAM_STR,
+            "publicoalvo" => \PDO::PARAM_STR,
         );
     }
 
     public function getValues() {
         return array(
             "idcurso" => $this->getIdCurso(),
-            "idorgao" => $this->getIdOrgao(),
+            "idcampus" => $this->getIdCampus(),
             "siglacurso" => $this->getSiglaCurso(),
-            "nomecurso" => $this->getNomeCurso()
+            "nomecurso" => $this->getNomeCurso(),
+            "publicoalvo" => $this->getPublicoAlvo(),
         );
     }
 

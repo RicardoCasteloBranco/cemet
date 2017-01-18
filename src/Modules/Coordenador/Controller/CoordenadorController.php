@@ -19,7 +19,7 @@ class CoordenadorController implements IController{
                 $pessoa = $this->buscaCoordenador(filter_input(INPUT_POST   , "cpf"));
             }
             if(filter_input(INPUT_POST, "btn_action") == "Insere"){
-                $this->insereCoordenador(filter_input_array(INPUT_POST));
+                $this->insereCoordenador(filter_input_array(INPUT_POST),$companhia->getIdCompanhia());
             }
         }
         return array(
@@ -70,13 +70,13 @@ class CoordenadorController implements IController{
         }
     }
     
-    private function insereCoordenador(array $dados){
+    private function insereCoordenador(array $dados, $idCompanhia){
         $classe = \CasteloBranco\Cemet\Factory\Creator::
         factoryMethod(\CasteloBranco\Cemet\Modules\Coordenador\Model\Coordenador::class,
             $dados);
         \CasteloBranco\Cemet\Modules\Coordenador\Model\CoordenadorTabela::
             insert($classe);
-        header();   
+        header("location:?module=Turma&page=index.php&idcompanhia=$idCompanhia");   
     }
     private function atualizaCoordenador($coordenador, $coordenadorAtualizado){
         \CasteloBranco\Cemet\Modules\Coordenador\Model\CoordenadorTabela::

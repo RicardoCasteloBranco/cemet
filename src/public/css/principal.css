@@ -14,7 +14,7 @@ html{font:Sans-Serif;}
 *Cabeçalho
 */
 .container { width: 100%; height: 10%; 
-    background: url("../img/cemet.png") bottom left 50px no-repeat, url("../img/extr.png") bottom left no-repeat, 
+    background: url("../img/acides.png") bottom left 50px no-repeat, url("../img/extr.png") bottom left no-repeat, 
         url(../img/pernambuco.png) bottom right 50px no-repeat; background-size: auto 100%;
      text-align: center; color: blue; font: normal bold 80% Arial; background-color: #fff;
 }

@@ -19,7 +19,7 @@ Principal to Application
     <body>
         <header>
             <div class="container">
-                <h1 id="titulo_cabecalho">SECRETARIA DE DEFESA SOCIAL<br>ACIDES - CEMET/I</h1>
+                <h1 id="titulo_cabecalho">SECRETARIA DE DEFESA SOCIAL<br>ACIDES</h1>
                 <h2 id="titulo_cabecalho">Sistema de Gerenciamento de Cursos</h2>
             </div>
         </header>            

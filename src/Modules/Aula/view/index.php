@@ -10,7 +10,7 @@ $disciplina = $dados["disciplina"];
     <thead>
         <tr>
             <th>Objetivo</th><th>Qtd de Aulas</th><th>Instrutor Secundário</th>
-            <th>Conteúdo</th><th>Eixo</th><th>Relação</th><th>Ação</th>
+            <th>Conteúdo</th><th>Eixo</th><th>Relação Transdisciplinar</th><th>Ação</th>
         </tr>
     </thead>
     <tbody>
